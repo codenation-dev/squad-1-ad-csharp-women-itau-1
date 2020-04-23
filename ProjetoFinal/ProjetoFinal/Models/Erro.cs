@@ -64,16 +64,5 @@ namespace ProjetoFinal.Models
         [Column("arquivado")]
         [Required]
         public bool arquivado { get; set; }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

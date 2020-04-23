@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj": {}
+    "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj": {
+    "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj",
+        "projectUniqueName": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj",
         "projectName": "ProjetoFinalModel.Test",
-        "projectPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj",
-        "packagesPath": "C:\\Users\\Carla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinalModelTest\\obj\\",
+        "projectPath": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinalModelTest\\ProjetoFinalModel.Test.csproj",
+        "packagesPath": "C:\\Users\\amanda.p.silva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinalModelTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Carla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amanda.p.silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
-                "projectPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj"
+              "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
+                "projectPath": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj"
               }
             }
           }
@@ -81,24 +81,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
+    "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
         "projectName": "ProjetoFinal",
-        "projectPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
-        "packagesPath": "C:\\Users\\Carla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\obj\\",
+        "projectPath": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
+        "packagesPath": "C:\\Users\\amanda.p.silva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amanda.p.silva\\codenation\\projetoFinal\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Carla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amanda.p.silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -158,7 +158,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -10,6 +10,8 @@ namespace ProjetoFinal.Models
     {
       
         public DbSet<Evento> Evento { get; set; }
+        public DbSet<Evento> Ambientes { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

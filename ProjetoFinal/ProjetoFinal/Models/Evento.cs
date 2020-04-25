@@ -18,9 +18,10 @@ namespace ProjetoFinal.Models
 
         [Column("evento")]
         [Required]
-        public int Eventos { get; set; }
+        [StringLength(100)]
+        public int NomeEvento { get; set; }
 
-        public virtual ICollection<Erro> Erro { get; set; }
+        public virtual ICollection<Erro> Erros { get; set; }
 
     }
 }

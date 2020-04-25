@@ -9,7 +9,7 @@ namespace ProjetoFinal.Models
     public class Context : DbContext
     {
       
-        public DbSet<Evento> Evento { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
         public DbSet<Ambiente> Ambientes { get; set; }
 
 

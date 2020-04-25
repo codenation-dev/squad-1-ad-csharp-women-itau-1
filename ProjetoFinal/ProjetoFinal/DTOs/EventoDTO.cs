@@ -12,6 +12,7 @@ namespace ProjetoFinal.DTOs
     public class EventoDTO
     {
         public int Id { get; set; }
+
         [Required]
         public int Eventos { get; set; }
     }

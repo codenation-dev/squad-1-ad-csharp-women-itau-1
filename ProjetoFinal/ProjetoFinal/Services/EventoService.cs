@@ -15,28 +15,28 @@ namespace ProjetoFinal.Services
             _context = context;
         }
 
-        public Evento FindById(int id)
+        public Evento ProcurarPorId(int id)
         {
-            return _context.Evento.Find(id);
+            return _context.Eventos.Find(id);
         }
 
-        public List<Evento> FindAllEvents()
+        public List<Evento> ListarEventos()
         {
-            return _context.Evento.Select(x => x).ToList();
+            return _context.Eventos.ToList();
         }
 
 
-        public Evento Save(Evento evento)
+        public Evento Salvar(Evento evento)
         {
-            var existe = _context.Evento
-                          .Where(x => x.Id == evento.Id)
-                          .FirstOrDefault();
+            var eventoEncontrado = _context.Eventos
+                                           .Where(x => x.Id == evento.Id)
+                                           .FirstOrDefault();
 
-            if (existe == null)
-                _context.Evento.Add(evento);
+            if (eventoEncontrado == null)
+                _context.Eventos.Add(evento);
             else
             {
-                existe.Eventos = evento.Eventos;
+                eventoEncontrado.NomeEvento = evento.NomeEvento;
             }
 
             _context.SaveChanges();

@@ -8,6 +8,7 @@ namespace ProjetoFinal.Models
 {
     public class Context : DbContext
     {
+
         public DbSet<Evento> Evento { get; set; }
         public DbSet<Erro> Erro { get; set; }
 
@@ -20,6 +21,5 @@ namespace ProjetoFinal.Models
         {
 
         }
-
     }
 }

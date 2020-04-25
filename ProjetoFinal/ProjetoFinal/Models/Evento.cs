@@ -8,24 +8,19 @@ using System.Threading.Tasks;
 namespace ProjetoFinal.Models
 {
 
-    [Table("user")]
-    public class User
+    [Table("evento")]
+    public class Evento
     {
         [Column("id")]
         [Required]
         [Key]
         public int Id { get; set; }
 
-        [Column("email")]
-        [StringLength(100)]
+        [Column("evento")]
         [Required]
-        public string Email { get; set; }
+        public int Eventos { get; set; }
 
-        [Column("password")]
-        [Required]
-        public string Password { get; set; }
-
-        public virtual ICollection<Logs> Logs { get; set; }
+        public virtual ICollection<Erro> Erro { get; set; }
 
     }
 }

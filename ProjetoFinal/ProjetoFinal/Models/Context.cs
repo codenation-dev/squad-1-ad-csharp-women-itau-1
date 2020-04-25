@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProjetoFinal.Models
 {
-    public class SquadContext : DbContext
+    public class Context : DbContext
     {
-        public DbSet<Logs> Logs { get; set; }
-        public DbSet<User> Users { get; set; }
-
+      
+        public DbSet<Evento> Evento { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

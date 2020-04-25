@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {}
+    "C:\\Users\\Carla\\Documents\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
+    "C:\\Users\\Carla\\Documents\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\Carla\\Documents\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
         "projectName": "ProjetoFinal",
-        "projectPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
+        "projectPath": "C:\\Users\\Carla\\Documents\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\ProjetoFinal.csproj",
         "packagesPath": "C:\\Users\\Carla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carla\\codenation\\ProjetoFinal\\ProjetoFinal\\obj\\",
+        "outputPath": "C:\\Users\\Carla\\Documents\\squad-1-ad-csharp-women-itau-1\\ProjetoFinal\\ProjetoFinal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

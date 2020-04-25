@@ -1,16 +1,16 @@
-﻿using ProjetoFinal.Models;
+using ProjetoFinal.Models;
 using System;
 using Xunit;
 
 namespace ProjetoFinalModel.Test
 {
-    public sealed class LogsModelTest : ModelBaseTest
+    public sealed class EventoModelTest : ModelBaseTest
     {
-        public LogsModelTest()
-            : base(new SquadContext())
+        public EventoModelTest()
+            : base(new Context())
         {
-            Model = "ProjetoFinal.Models.Logs";
-            Table = "logs";
+            Model = "ProjetoFinal.Models.Evento";
+            Table = "evento";
         }
 
         [Fact]
@@ -27,14 +27,7 @@ namespace ProjetoFinalModel.Test
 
         [Theory]
         [InlineData("id", false, typeof(int), null)]
-        [InlineData("level", false, typeof(string), null)]
-        [InlineData("titulo", false, typeof(string), null)]
-        [InlineData("detalhes", false, typeof(string), null)]
         [InlineData("evento", false, typeof(int), null)]
-        [InlineData("data", false, typeof(DateTime), null)]
-        [InlineData("coletado_por", false, typeof(string), null)]
-        [InlineData("arquivado", false, typeof(bool), null)]
-
 
         public void Devera_Ter_Campos(string campoNome, bool ehNulo, Type campoTipo, int? campoTamanho)
         {

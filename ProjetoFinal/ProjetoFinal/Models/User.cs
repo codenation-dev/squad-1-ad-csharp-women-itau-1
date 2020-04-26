@@ -14,12 +14,12 @@ namespace ProjetoFinal.Models
         [Column("id")]
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int Id {get; set; }
 
         [Column("email")]
         [StringLength(100)]
         [Required]
-        public string Email { get; set; }
+        public string Email {get; set; }
 
         [Column("password")]
         [Required]

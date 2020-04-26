@@ -4,8 +4,6 @@ using System.Collections.Generic;
 namespace ProjetoFinal.Models
 
 {
-    public class Nivel
-    {
         [Table("nivel")]
         public class Nivel 
         {

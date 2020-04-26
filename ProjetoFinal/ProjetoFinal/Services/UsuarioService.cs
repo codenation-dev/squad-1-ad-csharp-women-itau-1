@@ -1,4 +1,3 @@
-using CentralDeErros.Api.Interfaces;
 using System.Linq;
 using ProjetoFinal.Models;
 using ProjetoFinal.Interfaces;

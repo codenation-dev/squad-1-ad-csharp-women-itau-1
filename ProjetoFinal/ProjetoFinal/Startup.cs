@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using ProjetoFinal.Models;
+using ProjetoFinal.Services;
+using AutoMapper;
 
 namespace ProjetoFinal
 {
@@ -24,6 +27,9 @@ namespace ProjetoFinal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<Context>();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IEventoService, EventoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

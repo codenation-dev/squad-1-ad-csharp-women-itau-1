@@ -16,14 +16,14 @@ namespace ProjetoFinal.Models
 
         [Column("usuario_id")]
         [Required]
-        public int usuario_id { get; set; }
+        public int Usuario_id { get; set; }
 
         [ForeignKey("usuarioId")]
         public virtual Usuario UsuarioId { get; set; }
 
         [Column("nivel_id")]
         [Required]
-        public int nivel_id { get; set; }
+        public int Nivel_id { get; set; }
 
         [ForeignKey("nivelId")]
         public virtual Nivel NivelId { get; set; }
@@ -31,38 +31,38 @@ namespace ProjetoFinal.Models
         [Column("titulo")]
         [Required]
         [StringLength(100)]
-        public string titulo { get; set; }
+        public string Titulo { get; set; }
 
         [Column("detalhes")]
         [Required]
         [StringLength(100)]
-        public string detalhes { get; set; }
+        public string Detalhes { get; set; }
 
         [Column("ambiente_id")]
         [Required]
-        public int ambiente_id { get; set; }
+        public int Ambiente_id { get; set; }
 
         [ForeignKey("ambienteId")]
         public virtual Ambiente AmbienteId { get; set; }
 
         [Column("evento_id")]
         [Required]
-        public int evento_id { get; set; }
+        public int Evento_id { get; set; }
 
         [ForeignKey("eventoId")]
         public virtual Evento EventoId { get; set; }
 
         [Column("data")]
         [Required]
-        public DateTime data { get; set; }
+        public DateTime Data { get; set; }
 
         [Column("coletado")]
         [Required]
         [StringLength(100)]
-        public string coletado { get; set; }
+        public string Coletado { get; set; }
 
         [Column("arquivado")]
         [Required]
-        public bool arquivado { get; set; }
+        public bool Arquivado { get; set; }
     }
 }

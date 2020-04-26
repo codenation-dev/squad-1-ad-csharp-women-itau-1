@@ -8,24 +8,29 @@ using System.Threading.Tasks;
 namespace ProjetoFinal.Models
 {
 
-    [Table("user")]
-    public class User
+    [Table("usuario")]
+    public class Usuario
     {
         [Column("id")]
         [Required]
         [Key]
-        public int Id {get; set; }
+        public int Id { get; set; }
 
         [Column("email")]
         [StringLength(100)]
         [Required]
-        public string Email {get; set; }
+        public string Email { get; set; }
 
-        [Column("password")]
+        [Column("senha")]
         [Required]
-        public string Password { get; set; }
+        [StringLength(255)]
+        public string Senha { get; set; }
 
-        public virtual ICollection<Logs> Logs { get; set; }
+        [Column("token")]
+        [Required]
+        [MaxLenght(400)]
+        public string Token { get; set; }
+
 
     }
 }

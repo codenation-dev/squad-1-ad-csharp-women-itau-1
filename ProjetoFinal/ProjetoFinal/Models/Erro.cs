@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoFinal.Models
 {
+    [Table("erro")]
     public class Erro
     {
         [Column("id")]
@@ -18,15 +19,15 @@ namespace ProjetoFinal.Models
         [Required]
         public int Usuario_id { get; set; }
 
-        [ForeignKey("usuarioId")]
-        public virtual Usuario UsuarioId { get; set; }
+        //[ForeignKey("usuarioId")]
+        //public virtual Usuario UsuarioId { get; set; }
 
         [Column("nivel_id")]
         [Required]
         public int Nivel_id { get; set; }
 
-        [ForeignKey("nivelId")]
-        public virtual Nivel NivelId { get; set; }
+        //[ForeignKey("nivelId")]
+        //public virtual Nivel NivelId { get; set; }
 
         [Column("titulo")]
         [Required]

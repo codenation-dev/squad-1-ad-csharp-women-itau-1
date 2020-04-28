@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoFinal", "ProjetoFinal\ProjetoFinal.csproj", "{EB110AF2-7CF7-48A1-BCF7-09612D1FF8DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinal", "ProjetoFinal\ProjetoFinal.csproj", "{EB110AF2-7CF7-48A1-BCF7-09612D1FF8DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoFinalModel.Test", "ProjetoFinalModelTest\ProjetoFinalModel.Test.csproj", "{FCD10024-E963-41CD-8B1F-C5ECC7201DDD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoFinalService.Test", "ProjetoFinalModelTest\ProjetoFinalService.Test.csproj", "{1C07F631-2F3F-4F9D-B026-FEB56CDA6082}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinalModel.Test", "ProjetoFinalModelTest\ProjetoFinalModel.Test.csproj", "{FCD10024-E963-41CD-8B1F-C5ECC7201DDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{FCD10024-E963-41CD-8B1F-C5ECC7201DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD10024-E963-41CD-8B1F-C5ECC7201DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD10024-E963-41CD-8B1F-C5ECC7201DDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C07F631-2F3F-4F9D-B026-FEB56CDA6082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C07F631-2F3F-4F9D-B026-FEB56CDA6082}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C07F631-2F3F-4F9D-B026-FEB56CDA6082}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C07F631-2F3F-4F9D-B026-FEB56CDA6082}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoFinal.Services
 {
-    public class EventoService
+    public class EventoService : IEventoService
     {
         private Context _context;
         public EventoService(Context context)

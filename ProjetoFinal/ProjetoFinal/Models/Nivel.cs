@@ -13,12 +13,11 @@ namespace ProjetoFinal.Models
         {
             [Column("id")]
             [Key]
-            public int NivelId {get; set;}
+            public int Id { get; set; }
 
             [Column("nivel")]
             [StringLength(100)]
             [Required]
-            public string NivelNome {get; set }
+            public string NomeNivel { get; set; }
         }
-    }
 }

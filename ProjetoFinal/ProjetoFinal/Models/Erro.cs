@@ -15,19 +15,22 @@ namespace ProjetoFinal.Models
         [Key]
         public int Id { get; set; }
 
-        [Column("usuario_id")]
-        [Required]
-        public int Usuario_id { get; set; }
-
-        //[ForeignKey("usuarioId")]
-        //public virtual Usuario UsuarioId { get; set; }
-
         [Column("nivel_id")]
         [Required]
-        public int Nivel_id { get; set; }
+        public int NivelId { get; set; }
 
-        //[ForeignKey("nivelId")]
-        //public virtual Nivel NivelId { get; set; }
+        [Column("evento_id")]
+        [Required]
+        public int EventoId { get; set; }
+
+        [Column("ambiente_id")]
+        [Required]
+        public int AmbienteId { get; set; }
+
+        [Column("ip")]
+        [Required]
+        [MaxLength(100)]
+        public string Ip { get; set; }
 
         [Column("titulo")]
         [Required]
@@ -38,20 +41,6 @@ namespace ProjetoFinal.Models
         [Required]
         [StringLength(100)]
         public string Detalhes { get; set; }
-
-        [Column("ambiente_id")]
-        [Required]
-        public int Ambiente_id { get; set; }
-
-        [ForeignKey("ambienteId")]
-        public virtual Ambiente AmbienteId { get; set; }
-
-        [Column("evento_id")]
-        [Required]
-        public int Evento_id { get; set; }
-
-        [ForeignKey("eventoId")]
-        public virtual Evento EventoId { get; set; }
 
         [Column("data")]
         [Required]

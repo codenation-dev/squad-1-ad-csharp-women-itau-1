@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ProjetoFinal.Services
 {
-    public class ErroService
+    public class ErroService : IErroService
     {
         private Context _context;
 
@@ -13,39 +13,55 @@ namespace ProjetoFinal.Services
             _context = context;
         }
 
-        public IList<Erro> FindByAmbienteId(int ambienteId)
+        public Erro ProcurarPorId(int id)
         {
-            return _context.Erro.
-                Where(x => x.Ambiente_id == ambienteId).
-                ToList();
+            return _context.Erros.Find(id);
         }
 
-        public IList<Erro> FindByNivelId(int nivelId)
+        public Erro ProcurarPorAmbiente(int ambienteId)
         {
-            return _context.Erro.
-                Where(x => x.Nivel_id == nivelId).
-                ToList();
+            return _context.Erros.Find(ambienteId);
         }
 
-        public IList<Erro> FindByEventoId(int eventoId)
+        public Erro ProcurarPorNivel(int ambienteId, int? nivel)
         {
-            return _context.Erro.
-                Where(x => x.Evento_id == eventoId).
-                ToList();
+            return _context.Erros.Find(ambienteId, nivel);
         }
 
-        public Erro FindById(int usuarioId, int ambienteId, int nivelId, int eventoId)
+        public Erro ProcurarPorDescricao(int ambienteId, int? descricao)
         {
-            return _context.Erro.Find(usuarioId, ambienteId, nivelId, eventoId);
+            return _context.Erros.Find(ambienteId, descricao);
         }
 
-        public Erro Save(Erro erro)
+        public Erro ProcurarPorOrigem(int ambienteId, int? origem)
         {
-            var found = _context.Erro.Find(erro.Usuario_id, erro.Ambiente_id, erro.Nivel_id, erro.Evento_id);
-            if (found == null)
-                _context.Erro.Add(erro);
+            return _context.Erros.Find(ambienteId, origem);
+        }
+
+        public IList<Erro> OrdenarPorNivel()
+        {
+            return _context.Erros.OrderBy(x => x.NivelId).ToList();
+        }
+
+        public IList<Erro> OrdenarPorFrequencia()
+        {
+            return _context.Erros.OrderBy(x => x.NivelId).ToList();
+        }
+
+        public Erro Salvar(Erro erro)
+        {
+            var erroEncontrado = _context.Erros.Find(erro.Id);
+            if (erroEncontrado == null)
+                _context.Erros.Add(erro);
             else
-                found.Coletado = erro.Coletado;
+            {
+                erroEncontrado.Ip = erro.Ip;
+                erroEncontrado.Data = erro.Data;
+                erroEncontrado.Titulo = erro.Titulo;
+                erroEncontrado.Detalhes = erro.Detalhes;
+                erroEncontrado.Coletado = erro.Coletado;
+                erroEncontrado.Arquivado = erro.Arquivado;
+            }
             _context.SaveChanges();
             return erro;
         }

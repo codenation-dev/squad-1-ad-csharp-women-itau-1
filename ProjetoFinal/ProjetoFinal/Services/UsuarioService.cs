@@ -4,8 +4,7 @@ using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Services
 {
-    public class UsuarioService : IUsuario
-    //Criar a interface com o nome IUsuario
+    public class UsuarioService
     {
         private Context _context;
 

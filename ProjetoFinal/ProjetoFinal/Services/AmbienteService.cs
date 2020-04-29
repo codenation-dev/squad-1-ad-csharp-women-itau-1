@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ProjetoFinal.Models;
 
 namespace ProjetoFinal.Services
 {
-    public class AmbienteService
+    public class AmbienteService : IAmbienteService
     {
         private Context _context;
 
@@ -28,8 +26,8 @@ namespace ProjetoFinal.Services
         public Ambiente Salvar(Ambiente ambiente)
         {
             var ambienteEncontrado = _context.Ambientes
-                                              .Where(x => x.Id == ambiente.Id)
-                                              .FirstOrDefault();
+                                    .Where(x => x.Id == ambiente.Id)
+                                    .FirstOrDefault();
 
             if (ambienteEncontrado == null)
                 _context.Add(ambiente);

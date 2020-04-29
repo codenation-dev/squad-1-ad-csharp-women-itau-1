@@ -1,50 +1,43 @@
 using System.Linq;
 using System;
 using ProjetoFinal.Models;
-using ProjetoFinal.Interfaces;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoFinal.Services
 
 {
-    public class NivelService : INivel
-    //Criar interface com o nome INivel
+    public class NivelService : INivelService
     {
         public Context _context;
         public NivelService(Context context)
         {
-            this._context = context;
+            _context = context;
         }
-        public Nivel RegistraOuAtualiza(Nivel nivel)
-        {
-            var state;
-            if( nivel.NivelId == 0)
-            {
-                return state = EntityState.Added;
-            }
-            else
-            {
-                return state = EntityState.Modified;
-            }
-            _context.Entry(nivel).State = state;
-            _context.SaveChanges();
-            return nivel;
-        }
-        public Nivel ConsultaPorId(int id)
+        public Nivel ProcurarPorId(int id)
         {
             return _context.Niveis.Find(id);
         }
-        public Nivel ConsultaPorNome(string nome)
+
+        public IList<Nivel> ListarNiveis()
         {
-            return _context.Niveis.FirstOrDefault(n => n.NivelNome = nome);
+            return _context.Niveis.ToList();
         }
-        public List<Nivel> ConsultaTodos()
+
+        public Nivel Salvar(Nivel nivel)
         {
-            return _context.Niveis.Select(n => n).ToList();
-        }
-        public bool NivelExiste(int id)
-        {
-            return _context.Niveis.Any(e => e.NivelId == id);
+            var nivelEncontrado = _context.Niveis
+                                    .Where(x => x.Id == nivel.Id)
+                                    .FirstOrDefault();
+
+            if (nivelEncontrado == null)
+                _context.Add(nivel);
+            else
+                nivelEncontrado.NomeNivel = nivel.NomeNivel;
+
+            _context.SaveChanges();
+
+            return nivel;
         }
 
     }

@@ -7,7 +7,7 @@ namespace ProjetoFinalModel.Test
     public sealed class UserModelTest : ModelBaseTest
     {
         public UserModelTest()
-            : base(new SquadContext())
+            : base(new Context())
         {
             Model = "ProjetoFinal.Models.User";
             Table = "user";

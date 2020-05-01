@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using ProjetoFinal.Services;
 using ProjetoFinal.Models;
 using Microsoft.AspNetCore.Mvc;
-using ProjetoFinal.DTO;
+using ProjetoFinal.DTOs;
 
 namespace ProjetoFinal.Controllers
 {

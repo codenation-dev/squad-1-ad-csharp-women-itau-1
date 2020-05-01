@@ -1,6 +1,7 @@
+using System;
 using System.Linq;
 using ProjetoFinal.Models;
-using ProjetoFinal.Interfaces;
+using ProjetoFinal.Services;
 
 namespace ProjetoFinal.Services
 {
@@ -12,29 +13,34 @@ namespace ProjetoFinal.Services
         {
             _context = context;
         }
-        public bool RegistrarUsuario(string email, string senha)
-        {
-            _context.Usuario.Add(new Usuario { Email = email, Senha = senha});
 
-            if(_context.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha) != null)
+
+        public Usuario Salvar(Usuario usuario)
+        {
+            var usuarioEncontrado = _context.Usuarios.Find(usuario.Id, usuario.Email);
+            if (usuarioEncontrado == null)
+                _context.Usuarios.Add(usuario);
+            else
+            {
+                throw new NotImplementedException();
+            }
+            _context.SaveChanges();
+            return usuario;
+        }
+
+        public bool EncontrarLogin(string email, string senha)
+        {
+            var loginEncontrado = _context.Usuarios.SingleOrDefault(x => x.Email == email && x.Senha == senha);
+
+            if(loginEncontrado != null)
             {
                 return true;
             }
                 return false;
         }
-        public bool Login(string email, string senha)
-        {
-            _context.Usuario.SingleOrDefault(x => x.Email == email && x.Senha == senha);
-
-            if(_context.Usuario.FirstOrDefault(x => x.Email == email && x.Senha == senha) != null)
+            public Usuario ProcurarPorId(int id)
             {
-                return true;
-            }
-                return false;
-        }
-            public bool UsuarioId(int id)
-            {
-                return _context.Usuario.Any(u => u.Id == id);
+                return _context.Usuarios.Find(id);
             }
     }
 }

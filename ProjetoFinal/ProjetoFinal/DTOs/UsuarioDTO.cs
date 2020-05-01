@@ -11,7 +11,6 @@ namespace ProjetoFinal.DTOs
         public int Id { get; set; }
 
         [Required]
-<<<<<<< Updated upstream
         public string Email { get; set; }
 
         [Required]
@@ -19,15 +18,5 @@ namespace ProjetoFinal.DTOs
 
         [Required]
         public string Senha { get; set; }
-=======
-        public string Nome { get; set; }
-
-        [Required]
-        public string Email { get; set; }
->>>>>>> Stashed changes
-
-        [Required]
-        public string Senha { get; set; }
-
     }
 }

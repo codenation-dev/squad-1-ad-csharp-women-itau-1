@@ -35,8 +35,8 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        [HttpGet("{nomeAmbiente}")]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente)
+        [HttpGet]
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
         {
             var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
 
@@ -49,7 +49,7 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        [HttpGet("{nomeAmbiente}/{nomeNivel}")]
+        [HttpGet("ambiente/{nomeAmbiente}/nivel/{nomeNivel}")]
         public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente, string nomeNivel)
         {
             var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
@@ -63,7 +63,7 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        [HttpGet("{nomeAmbiente}/{desc}")]
+        [HttpGet("ambiente/{nomeAmbiente}/descricao/{descricao}")]
         public ActionResult<IEnumerable<ErroDTO>> Get(string nomeAmbiente, string descricao)
         {
             var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
@@ -77,20 +77,7 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        //[HttpGet]
-        //public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
-        //{
-        //    var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
-
-        //    if (erroLista != null)
-        //    {
-        //        var retorno = _mapper.Map<List<ErroDTO>>(erroLista);
-        //        return Ok(retorno);
-        //    }
-        //    else
-        //        return NotFound();
-        //}
-
+        
         // POST api/erro
         [HttpPost]
         public ActionResult<ErroDTO> Post([FromBody] ErroDTO value)

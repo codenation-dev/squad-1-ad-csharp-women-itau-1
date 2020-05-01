@@ -72,5 +72,14 @@ namespace ProjetoFinal.Services
            
             return erro;
         }
+
+        public void Remover(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+            if (erroEncontrado != null) {
+                _context.Erros.Remove(erroEncontrado);
+                _context.SaveChanges();
+            }
+        }
     }
 }

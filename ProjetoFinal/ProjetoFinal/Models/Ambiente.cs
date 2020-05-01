@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoFinal.Models
 {
+    [Table("ambiente")]
     public class Ambiente
     {
         [Column("id")]

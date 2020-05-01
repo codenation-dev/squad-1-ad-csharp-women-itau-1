@@ -29,7 +29,10 @@ namespace ProjetoFinal
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<Context>();
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IEventoService, EventoService>();
+            services.AddScoped<IAmbienteService, AmbienteService>();
+            services.AddScoped<IErroService, ErroService>();
+            services.AddScoped<INivelService, NivelService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

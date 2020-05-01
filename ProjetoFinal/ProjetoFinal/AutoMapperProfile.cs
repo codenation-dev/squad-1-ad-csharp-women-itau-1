@@ -8,7 +8,10 @@ namespace ProjetoFinal
     {
         public AutoMapperProfile()
         {
-            CreateMap<Evento, EventoDTO>().ReverseMap();
+            CreateMap<Ambiente, AmbienteDTO>().ReverseMap();
+            CreateMap<Erro, ErroDTO>().ReverseMap();
+            CreateMap<Nivel, NivelDTO>().ReverseMap();
+            CreateMap<Usuario, UsuarioDTO>().ReverseMap();
         }
     }
 }

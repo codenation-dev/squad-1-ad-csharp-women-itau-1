@@ -7,7 +7,7 @@ namespace ProjetoFinalModel.Test
     public sealed class LogsModelTest : ModelBaseTest
     {
         public LogsModelTest()
-            : base(new SquadContext())
+            : base(new Context())
         {
             Model = "ProjetoFinal.Models.Logs";
             Table = "logs";

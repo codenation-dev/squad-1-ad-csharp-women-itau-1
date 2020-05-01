@@ -20,8 +20,8 @@ namespace ProjetoFinal.Controllers
             _mapper = mapper;
         }
 
-        // GET api/erro/{id}
-        [HttpGet("{id}")]
+        // GET api/erro/detalhes/{id}
+        [HttpGet("detalhes/{id}")]
         public ActionResult<ErroDTO> Get(int id)
         {
             var erroId = _erroService.ProcurarPorId(id);
@@ -36,7 +36,7 @@ namespace ProjetoFinal.Controllers
         }
 
         [HttpGet("{nomeAmbiente}")]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente)
         {
             var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
 
@@ -48,6 +48,20 @@ namespace ProjetoFinal.Controllers
             else
                 return NotFound();
         }
+
+        //[HttpGet]
+        //public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
+        //{
+        //    var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
+
+        //    if (erroLista != null)
+        //    {
+        //        var retorno = _mapper.Map<List<ErroDTO>>(erroLista);
+        //        return Ok(retorno);
+        //    }
+        //    else
+        //        return NotFound();
+        //}
 
         // POST api/erro
         [HttpPost]

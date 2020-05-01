@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 namespace ProjetoFinal.Models
 
 {
-        [Table("nivel")]
-        public class Nivel 
-        {
-            [Column("id")]
-            [Key]
-            public int Id { get; set; }
+    [Table("nivel")]
+    public class Nivel 
+    {
+        [Column("id")]
+        [Key]
+        public int Id { get; set; }
 
-            [Column("nivel")]
-            [StringLength(100)]
-            [Required]
-            public string NomeNivel { get; set; }
-        }
+        [Column("nivel")]
+        [StringLength(100)]
+        [Required]
+        public string NomeNivel { get; set; }
+
+        public virtual ICollection<Erro> Erros { get; set; }
+    }
 }

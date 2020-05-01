@@ -8,17 +8,23 @@ namespace ProjetoFinal.DTOs
 {
     public class UsuarioDTO
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
+<<<<<<< Updated upstream
         public string Email { get; set; }
 
         [Required]
         public string Senha { get; set; }
+=======
+        public string Nome { get; set; }
 
         [Required]
-        public string Token { get; set; }
+        public string Email { get; set; }
+>>>>>>> Stashed changes
+
+        [Required]
+        public string Senha { get; set; }
 
     }
 }

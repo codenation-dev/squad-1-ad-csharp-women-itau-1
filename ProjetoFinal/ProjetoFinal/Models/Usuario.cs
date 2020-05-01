@@ -22,9 +22,5 @@ namespace ProjetoFinal.Models
         [StringLength(255)]
         public string Senha { get; set; }
 
-        [Column("token")]
-        [Required]
-        [MaxLength(400)]
-        public string Token { get; set; }
     }
 }

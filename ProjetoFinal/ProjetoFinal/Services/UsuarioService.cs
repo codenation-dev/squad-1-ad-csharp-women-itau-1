@@ -1,10 +1,13 @@
 using System.Linq;
 using ProjetoFinal.Models;
+<<<<<<< Updated upstream
 using ProjetoFinal.Interfaces;
+=======
+>>>>>>> Stashed changes
 
 namespace ProjetoFinal.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private Context _context;
 
@@ -12,7 +15,12 @@ namespace ProjetoFinal.Services
         {
             _context = context;
         }
+<<<<<<< Updated upstream
         public bool RegistrarUsuario(string email, string senha)
+=======
+
+        public Usuario Salvar(Usuario usuario)
+>>>>>>> Stashed changes
         {
             _context.Usuario.Add(new Usuario { Email = email, Senha = senha});
 
@@ -26,15 +34,27 @@ namespace ProjetoFinal.Services
         {
             _context.Usuario.SingleOrDefault(x => x.Email == email && x.Senha == senha);
 
+<<<<<<< Updated upstream
             if(_context.Usuario.FirstOrDefault(x => x.Email == email && x.Senha == senha) != null)
+=======
+            if (loginEncontrado != null)
+>>>>>>> Stashed changes
             {
                 return true;
             }
-                return false;
+            return false;
         }
+
+        public Usuario ProcurarPorId(int id)
+        {
+            return _context.Usuarios.Find(id);
+        }
+<<<<<<< Updated upstream
             public bool UsuarioId(int id)
             {
                 return _context.Usuario.Any(u => u.Id == id);
             }
+=======
+>>>>>>> Stashed changes
     }
 }

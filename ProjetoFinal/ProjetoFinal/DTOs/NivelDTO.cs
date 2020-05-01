@@ -9,9 +9,9 @@ namespace ProjetoFinal.DTOs
 {
     public class NivelDTO
     {
-        public int NivelId { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public string NivelNome { get; set; }
+        public string NomeNivel { get; set; }
     }
 }

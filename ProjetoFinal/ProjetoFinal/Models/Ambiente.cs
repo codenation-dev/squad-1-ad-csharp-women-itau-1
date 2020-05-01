@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoFinal.Models
@@ -14,5 +15,8 @@ namespace ProjetoFinal.Models
         [Required]
         [StringLength(100)]
         public string NomeAmbiente { get; set; }
+
+        public virtual ICollection<Erro> Erros { get; set; }
+
     }
 }

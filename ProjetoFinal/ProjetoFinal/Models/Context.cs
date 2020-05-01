@@ -11,6 +11,7 @@ namespace ProjetoFinal.Models
         public DbSet<Ambiente> Ambientes { get; set; }
         public DbSet<Nivel> Niveis { get; set; }
         public DbSet<Erro> Erros { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

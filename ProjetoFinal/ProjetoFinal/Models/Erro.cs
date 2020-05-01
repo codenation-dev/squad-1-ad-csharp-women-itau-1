@@ -19,6 +19,9 @@ namespace ProjetoFinal.Models
         [Required]
         public int NivelId { get; set; }
 
+        [ForeignKey("NivelId")]
+        public virtual Nivel Niveis { get; set; }
+
         [Column("evento_id")]
         [Required]
         public int EventoId { get; set; }
@@ -26,6 +29,9 @@ namespace ProjetoFinal.Models
         [Column("ambiente_id")]
         [Required]
         public int AmbienteId { get; set; }
+
+        [ForeignKey("AmbienteId")]
+        public virtual Ambiente Ambientes { get; set; }
 
         [Column("ip")]
         [Required]
@@ -37,10 +43,10 @@ namespace ProjetoFinal.Models
         [StringLength(100)]
         public string Titulo { get; set; }
 
-        [Column("detalhes")]
+        [Column("descricao")]
         [Required]
         [StringLength(100)]
-        public string Detalhes { get; set; }
+        public string Descricoes { get; set; }
 
         [Column("data")]
         [Required]

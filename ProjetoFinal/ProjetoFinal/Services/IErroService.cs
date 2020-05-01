@@ -5,13 +5,14 @@ namespace ProjetoFinal.Services
 {
     public interface IErroService
     {
+        IList<Erro> ListarErros();
         IList<Erro> OrdenarPorFrequencia();
         IList<Erro> OrdenarPorNivel();
-        Erro ProcurarPorAmbiente(int ambienteId);
-        Erro ProcurarPorDescricao(int ambienteId, int? descricao);
+        IList<Erro> ProcurarPorAmbiente(string nomeAmbiente);
+        IList<Erro> ProcurarPorDescricao(string nomeAmbiente, string descricao);
         Erro ProcurarPorId(int id);
-        Erro ProcurarPorNivel(int ambienteId, int? nivel);
-        Erro ProcurarPorOrigem(int ambienteId, int? origem);
+        IList<Erro> ProcurarPorNivel(string nomeAmbiente, string nomeNivel);
+        IList<Erro> ProcurarPorOrigem(string nomeAmbiente, string origem);
         Erro Salvar(Erro erro);
     }
 }

@@ -5,7 +5,7 @@ using ProjetoFinal.Services;
 
 namespace ProjetoFinal.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private Context _context;
 
@@ -13,7 +13,6 @@ namespace ProjetoFinal.Services
         {
             _context = context;
         }
-
 
         public Usuario Salvar(Usuario usuario)
         {
@@ -38,9 +37,10 @@ namespace ProjetoFinal.Services
             }
                 return false;
         }
-            public Usuario ProcurarPorId(int id)
-            {
-                return _context.Usuarios.Find(id);
-            }
+        
+        public Usuario ProcurarPorId(int id)
+        {
+            return _context.Usuarios.Find(id);
+        }
     }
 }

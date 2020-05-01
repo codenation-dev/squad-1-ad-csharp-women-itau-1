@@ -8,7 +8,6 @@ namespace ProjetoFinal.DTOs
 {
     public class UsuarioDTO
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
@@ -19,9 +18,5 @@ namespace ProjetoFinal.DTOs
 
         [Required]
         public string Senha { get; set; }
-
-        [Required]
-        public string Token { get; set; }
-
     }
 }

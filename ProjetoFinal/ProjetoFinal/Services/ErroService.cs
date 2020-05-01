@@ -18,24 +18,28 @@ namespace ProjetoFinal.Services
             return _context.Erros.Find(id);
         }
 
-        public Erro ProcurarPorAmbiente(int ambienteId)
+        public IList<Erro> ListarErros()
         {
-            return _context.Erros.Find(ambienteId);
+            return _context.Erros.ToList();
+        }
+        public IList<Erro> ProcurarPorAmbiente(string nomeAmbiente)
+        {
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente).ToList();
         }
 
-        public Erro ProcurarPorNivel(int ambienteId, int? nivel)
+        public IList<Erro> ProcurarPorNivel(string nomeAmbiente, string nomeNivel)
         {
-            return _context.Erros.Find(ambienteId, nivel);
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Niveis.NomeNivel == nomeNivel).ToList();
         }
 
-        public Erro ProcurarPorDescricao(int ambienteId, int? descricao)
+        public IList<Erro> ProcurarPorDescricao(string nomeAmbiente, string descricao)
         {
-            return _context.Erros.Find(ambienteId, descricao);
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes == descricao).ToList();
         }
 
-        public Erro ProcurarPorOrigem(int ambienteId, int? origem)
+        public IList<Erro> ProcurarPorOrigem(string nomeAmbiente, string origem)
         {
-            return _context.Erros.Find(ambienteId, origem);
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Ip == origem).ToList();
         }
 
         public IList<Erro> OrdenarPorNivel()
@@ -58,7 +62,7 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Ip = erro.Ip;
                 erroEncontrado.Data = erro.Data;
                 erroEncontrado.Titulo = erro.Titulo;
-                erroEncontrado.Detalhes = erro.Detalhes;
+                erroEncontrado.Descricoes = erro.Descricoes;
                 erroEncontrado.Coletado = erro.Coletado;
                 erroEncontrado.Arquivado = erro.Arquivado;
             }

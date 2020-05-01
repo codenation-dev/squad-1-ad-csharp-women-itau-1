@@ -11,30 +11,30 @@ namespace ProjetoFinal.DTO
         public int Id { get; set; }
 
         [Required]
-        public int usuario_id { get; set; }
+        public int NivelId { get; set; }
 
         [Required]
-        public int nivel_id { get; set; }
+        public int EventoId { get; set; }
 
         [Required]
-        public string titulo { get; set; }
+        public int AmbienteId { get; set; }
 
         [Required]
-        public string detalhes { get; set; }
+        public string Ip { get; set; }
 
         [Required]
-        public int ambiente_id { get; set; }
+        public string Titulo { get; set; }
         
         [Required]
-        public int evento_id { get; set; }
+        public string Descricoes { get; set; }
         
         [Required]
-        public DateTime data { get; set; }
+        public DateTime Data { get; set; }
 
         [Required]
-        public string coletado { get; set; }
+        public string Coletado { get; set; }
 
         [Required]
-        public bool arquivado { get; set; }
+        public bool Arquivado { get; set; }
     }
 }

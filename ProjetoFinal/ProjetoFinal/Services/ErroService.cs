@@ -81,5 +81,27 @@ namespace ProjetoFinal.Services
                 _context.SaveChanges();
             }
         }
+
+        public void Arquivar(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+
+            if (erroEncontrado != null)
+            {
+                erroEncontrado.Arquivado = true;
+                _context.SaveChanges();
+            }
+        }
+
+        public void Desarquivar(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+
+            if (erroEncontrado != null)
+            {
+                erroEncontrado.Arquivado = false;
+                _context.SaveChanges();
+            }
+        }
     }
 }

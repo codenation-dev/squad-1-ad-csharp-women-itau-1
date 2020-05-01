@@ -22,6 +22,7 @@ namespace ProjetoFinal.Services
         {
             return _context.Erros.ToList();
         }
+
         public IList<Erro> ProcurarPorAmbiente(string nomeAmbiente)
         {
             return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente).ToList();
@@ -55,6 +56,7 @@ namespace ProjetoFinal.Services
         public Erro Salvar(Erro erro)
         {
             var erroEncontrado = _context.Erros.Find(erro.Id);
+
             if (erroEncontrado == null)
                 _context.Erros.Add(erro);
             else
@@ -67,6 +69,7 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Arquivado = erro.Arquivado;
             }
             _context.SaveChanges();
+           
             return erro;
         }
     }

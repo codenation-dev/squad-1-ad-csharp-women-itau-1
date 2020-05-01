@@ -1,9 +1,7 @@
+using System;
 using System.Linq;
 using ProjetoFinal.Models;
-<<<<<<< Updated upstream
-using ProjetoFinal.Interfaces;
-=======
->>>>>>> Stashed changes
+using ProjetoFinal.Services;
 
 namespace ProjetoFinal.Services
 {
@@ -15,46 +13,34 @@ namespace ProjetoFinal.Services
         {
             _context = context;
         }
-<<<<<<< Updated upstream
-        public bool RegistrarUsuario(string email, string senha)
-=======
 
         public Usuario Salvar(Usuario usuario)
->>>>>>> Stashed changes
         {
-            _context.Usuario.Add(new Usuario { Email = email, Senha = senha});
+            var usuarioEncontrado = _context.Usuarios.Find(usuario.Id, usuario.Email);
+            if (usuarioEncontrado == null)
+                _context.Usuarios.Add(usuario);
+            else
+            {
+                throw new NotImplementedException();
+            }
+            _context.SaveChanges();
+            return usuario;
+        }
 
-            if(_context.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha) != null)
+        public bool EncontrarLogin(string email, string senha)
+        {
+            var loginEncontrado = _context.Usuarios.SingleOrDefault(x => x.Email == email && x.Senha == senha);
+
+            if(loginEncontrado != null)
             {
                 return true;
             }
                 return false;
         }
-        public bool Login(string email, string senha)
-        {
-            _context.Usuario.SingleOrDefault(x => x.Email == email && x.Senha == senha);
-
-<<<<<<< Updated upstream
-            if(_context.Usuario.FirstOrDefault(x => x.Email == email && x.Senha == senha) != null)
-=======
-            if (loginEncontrado != null)
->>>>>>> Stashed changes
-            {
-                return true;
-            }
-            return false;
-        }
-
+        
         public Usuario ProcurarPorId(int id)
         {
             return _context.Usuarios.Find(id);
         }
-<<<<<<< Updated upstream
-            public bool UsuarioId(int id)
-            {
-                return _context.Usuario.Any(u => u.Id == id);
-            }
-=======
->>>>>>> Stashed changes
     }
 }

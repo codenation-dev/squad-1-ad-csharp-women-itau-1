@@ -12,6 +12,11 @@ namespace ProjetoFinal.Models
         [Key]
         public int Id { get; set; }
 
+        [Column("nome")]
+        [Required]
+        [StringLength(100)]
+        public string Nome { get; set; }
+
         [Column("email")]
         [StringLength(100)]
         [Required]

@@ -12,7 +12,7 @@ namespace ProjetoFinal.Controllers
     [ApiController]
     public class ErroController : ControllerBase
     {
-        private IErroService _erroService;
+        private readonly IErroService _erroService;
         private readonly IMapper _mapper;
         public ErroController(IErroService service, IMapper mapper)
         {
@@ -35,18 +35,18 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        // GET api/erro
-        [HttpGet]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll(string ambiente)
+        [HttpGet("{nomeAmbiente}")]
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
         {
-            if (ambiente == null)
+            var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
+
+            if (erroLista != null)
             {
-                var ambienteEncontrado = _erroService.ProcurarPorAmbiente(ambiente).ToList();
-                var retorno = _mapper.Map<List<ErroDTO>>(ambiente);
-                return Ok(ambiente);
+                var retorno = _mapper.Map<List<ErroDTO>>(erroLista);
+                return Ok(retorno);
             }
             else
-                return NoContent();
+                return NotFound();
         }
 
         // POST api/erro

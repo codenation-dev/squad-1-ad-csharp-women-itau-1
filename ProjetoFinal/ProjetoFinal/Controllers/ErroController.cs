@@ -49,6 +49,34 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
+        [HttpGet("{nomeAmbiente}/{nomeNivel}")]
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente, string nomeNivel)
+        {
+            var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
+
+            if (erroNivel != null)
+            {
+                var retorno = _mapper.Map<List<ErroDTO>>(erroNivel);
+                return Ok(retorno);
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpGet("{nomeAmbiente}/{desc}")]
+        public ActionResult<IEnumerable<ErroDTO>> Get(string nomeAmbiente, string descricao)
+        {
+            var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
+
+            if (erroDesc != null)
+            {
+                var retorno = _mapper.Map<List<ErroDTO>>(erroDesc);
+                return Ok(retorno);
+            }
+            else
+                return NotFound();
+        }
+
         //[HttpGet]
         //public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
         //{

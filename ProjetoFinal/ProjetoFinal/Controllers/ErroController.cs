@@ -31,19 +31,22 @@ namespace ProjetoFinal.Controllers
                 var retorno = _mapper.Map<ErroDTO>(erroId);
                 return Ok(retorno);
             }
-
             else
                 return NotFound();
         }
 
         // GET api/erro
         [HttpGet]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll()
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string ambiente)
         {
-                var erroLista = _erroService.ListarErros().ToList();
-                var retorno = _mapper.Map<List<ErroDTO>>(erroLista);
-
-                return Ok(retorno);
+            if (ambiente == null)
+            {
+                var ambienteEncontrado = _erroService.ProcurarPorAmbiente(ambiente).ToList();
+                var retorno = _mapper.Map<List<ErroDTO>>(ambiente);
+                return Ok(ambiente);
+            }
+            else
+                return NoContent();
         }
 
         // POST api/erro

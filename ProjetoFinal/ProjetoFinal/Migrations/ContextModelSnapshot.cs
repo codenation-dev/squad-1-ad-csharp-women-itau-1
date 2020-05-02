@@ -33,7 +33,7 @@ namespace ProjetoFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ambientes");
+                    b.ToTable("ambiente");
                 });
 
             modelBuilder.Entity("ProjetoFinal.Models.Erro", b =>

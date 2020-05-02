@@ -43,14 +43,14 @@ namespace ProjetoFinal.Services
             return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Ip == origem).ToList();
         }
 
-        public IList<Erro> OrdenarPorNivel()
+        public IList<Erro> OrdenarPorNivel(List<Erro> erroLista)
         {
-            return _context.Erros.OrderBy(x => x.NivelId).ToList();
+            return erroLista.OrderBy(x => x.NivelId).ToList();
         }
 
-        public IList<Erro> OrdenarPorFrequencia()
+        public IList<Erro> OrdenarPorFrequencia(List<Erro> erroLista)
         {
-            return _context.Erros.OrderBy(x => x.NivelId).ToList();
+            return erroLista.GroupBy(x => x.NivelId).OrderByDescending(x => x.Count()).SelectMany(x => x).ToList();
         }
 
         public Erro Salvar(Erro erro)
@@ -69,14 +69,15 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Arquivado = erro.Arquivado;
             }
             _context.SaveChanges();
-           
+
             return erro;
         }
 
         public void Remover(Erro erro)
         {
             var erroEncontrado = ProcurarPorId(erro.Id);
-            if (erroEncontrado != null) {
+            if (erroEncontrado != null)
+            {
                 _context.Erros.Remove(erroEncontrado);
                 _context.SaveChanges();
             }

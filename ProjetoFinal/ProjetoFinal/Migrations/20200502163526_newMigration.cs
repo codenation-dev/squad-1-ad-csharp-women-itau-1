@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoFinal.Migrations
 {
-    public partial class ProjetoFinal : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace ProjetoFinal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ambientes", x => x.id);
+                    table.PrimaryKey("PK_ambiente", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,9 +69,9 @@ namespace ProjetoFinal.Migrations
                 {
                     table.PrimaryKey("PK_erro", x => x.id);
                     table.ForeignKey(
-                        name: "FK_erro_Ambientes_ambiente_id",
+                        name: "FK_erro_ambiente_ambiente_id",
                         column: x => x.ambiente_id,
-                        principalTable: "Ambientes",
+                        principalTable: "ambiente",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -102,7 +102,7 @@ namespace ProjetoFinal.Migrations
                 name: "usuario");
 
             migrationBuilder.DropTable(
-                name: "Ambientes");
+                name: "ambiente");
 
             migrationBuilder.DropTable(
                 name: "nivel");

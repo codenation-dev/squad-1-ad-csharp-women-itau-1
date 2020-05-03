@@ -10,8 +10,8 @@ using ProjetoFinal.Models;
 namespace ProjetoFinal.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200501192212_ProjetoFinal")]
-    partial class ProjetoFinal
+    [Migration("20200502163526_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,7 @@ namespace ProjetoFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ambientes");
+                    b.ToTable("ambiente");
                 });
 
             modelBuilder.Entity("ProjetoFinal.Models.Erro", b =>

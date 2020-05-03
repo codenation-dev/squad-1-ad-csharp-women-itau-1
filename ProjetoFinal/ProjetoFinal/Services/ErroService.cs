@@ -67,6 +67,9 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Descricoes = erro.Descricoes;
                 erroEncontrado.Coletado = erro.Coletado;
                 erroEncontrado.Arquivado = erro.Arquivado;
+               //erroEncontrado.Ambientes.NomeAmbiente = erro.Ambientes.NomeAmbiente;
+                //erroEncontrado.Niveis.NomeNivel = erro.Niveis.NomeNivel;
+                erroEncontrado.EventoId = erro.EventoId;
             }
             _context.SaveChanges();
 

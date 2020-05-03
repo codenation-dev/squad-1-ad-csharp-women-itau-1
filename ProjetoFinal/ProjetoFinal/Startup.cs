@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjetoFinal.Models;
 using ProjetoFinal.Services;
 using AutoMapper;
+using ProjetoFinal.ConfigStartup;
 
 namespace ProjetoFinal
 {
@@ -33,6 +34,8 @@ namespace ProjetoFinal
             services.AddScoped<IErroService, ErroService>();
             services.AddScoped<INivelService, NivelService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+
+            services.AddIdentityConfiguration(Configuration); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

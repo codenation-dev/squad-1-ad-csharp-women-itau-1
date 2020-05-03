@@ -11,16 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProjetoFinal.Controllers
 {
-    [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/{controller}")]
+    [Produces("application/json")]
     [ApiController]
- 
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class IdentityAuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
-        public IdentityAuthController(UserManager<IdentityUser> userManager)
+        
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
         [HttpGet]
 

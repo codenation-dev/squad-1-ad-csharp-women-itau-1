@@ -1,16 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
+﻿using ProjetoFinal.ConfigStartup;
+using ProjetoFinal.Filters;
 using ProjetoFinal.Models;
 using ProjetoFinal.Services;
 using AutoMapper;
-<<<<<<< Updated upstream
-=======
-using ProjetoFinal.ConfigStartup;
-using ProjetoFinal.Filters;
 using System.Security.Claims;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.Extensions.Options;
@@ -19,7 +11,14 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
->>>>>>> Stashed changes
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using ProjetoFinal.ConfigStartup;
+
 
 namespace ProjetoFinal
 {
@@ -57,8 +56,7 @@ namespace ProjetoFinal
             services.AddScoped<IErroService, ErroService>();
             services.AddScoped<INivelService, NivelService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
-<<<<<<< Updated upstream
-=======
+
             services.AddIdentityConfiguration(Configuration);
 
             services.AddApiVersioning(p =>
@@ -93,7 +91,6 @@ namespace ProjetoFinal
                 opt.SuppressModelStateInvalidFilter = true;
             });
 
->>>>>>> Stashed changes
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

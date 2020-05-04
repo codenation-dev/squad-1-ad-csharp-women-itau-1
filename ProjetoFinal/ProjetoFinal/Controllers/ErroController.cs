@@ -74,91 +74,137 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-<<<<<<< Updated upstream
-        [HttpGet("ambiente/{nomeAmbiente}/nivel/{nomeNivel}")]
-        public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel)
-=======
+
         [HttpGet("ambiente/{nomeAmbiente}/{nomeNivel}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel, string ordNivel = default(string), string ordFrequencia = default(string))
->>>>>>> Stashed changes
+
         {
             var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
 
             if (erroNivel != null)
             {
-                var retorno = _mapper.Map<List<ErroDTO>>(erroNivel);
-                return Ok(retorno);
+                if (ordNivel != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorNivel(erroNivel);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else if (ordFrequencia != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorFrequencia(erroNivel);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else
+                {
+                    var retorno = _mapper.Map<List<ErroDTO>>(erroNivel);
+                    return Ok(retorno);
+                }
             }
             else
                 return NotFound();
         }
 
-<<<<<<< Updated upstream
-        [HttpGet("ambiente/{nomeAmbiente}/descricao/{descricao}")]
-        public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string orde)
-=======
+
         [HttpGet("descricao/{nomeAmbiente}/{descricao}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string ordNivel = default(string), string ordFrequencia = default(string))
->>>>>>> Stashed changes
+
         {
             var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
 
             if (erroDesc != null)
             {
-                var retorno = _mapper.Map<List<ErroDTO>>(erroDesc);
-                return Ok(retorno);
+                if (ordNivel != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorNivel(erroDesc);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else if (ordFrequencia != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorFrequencia(erroDesc);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else
+                {
+                    var retorno = _mapper.Map<List<ErroDTO>>(erroDesc);
+                    return Ok(retorno);
+                }
             }
             else
                 return NotFound();
         }
 
-<<<<<<< Updated upstream
-        [HttpGet("ambiente/{nomeAmbiente}/origem/{origem}")]
-        public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem)
-=======
         [HttpGet("origem/{nomeAmbiente}/{origem}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem, string ordNivel = default(string), string ordFrequencia = default(string))
->>>>>>> Stashed changes
+
         {
             var erroOrigem = _erroService.ProcurarPorOrigem(nomeAmbiente, origem).ToList();
 
             if (erroOrigem != null)
             {
-                var retorno = _mapper.Map<List<ErroDTO>>(erroOrigem);
-                return Ok(retorno);
+                if (ordNivel != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorNivel(erroOrigem);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else if (ordFrequencia != null)
+                {
+                    var ordenacao = _erroService.OrdenarPorFrequencia(erroOrigem);
+                    var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
+                    return Ok(retorno);
+                }
+                else
+                {
+                    var retorno = _mapper.Map<List<ErroDTO>>(erroOrigem);
+                    return Ok(retorno);
+                }
             }
             else
                 return NotFound();
         }
-
-<<<<<<< Updated upstream
-
-        // POST api/erro
-        [HttpPost]
-        public ActionResult<ErroDTO> Post([FromBody] ErroDTO value)
-=======
+        
         // POST api/salvar
         [HttpPost("salvar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<List<ErroDTO>> Post([FromBody]List<ErroDTO> value)
->>>>>>> Stashed changes
+
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var evento = _mapper.Map<Erro>(value);
-            var retorno = _erroService.Salvar(evento);
+            List<ErroDTO> retorno = new List<ErroDTO>();
 
-            return Ok(_mapper.Map<ErroDTO>(retorno));
+            foreach (ErroDTO erro in value)
+            {
+                var newErro = new Erro()
+                {
+                    Ip = erro.Ip,
+                    Data = erro.Data,
+                    Titulo = erro.Titulo,
+                    Descricoes = erro.Descricoes,
+                    Coletado = erro.Coletado,
+                    Arquivado = erro.Arquivado,
+                    AmbienteId = erro.AmbienteId,
+                    //Niveis.NomeNivel = erro.Niveis.NomeNivel,
+                    EventoId = erro.EventoId
+                };
+
+                var retornoErro = _erroService.Salvar(newErro);
+
+                retorno.Add(_mapper.Map<ErroDTO>(retornoErro));
+            }
+            return Ok(retorno);
         }
 
     }
-
 }

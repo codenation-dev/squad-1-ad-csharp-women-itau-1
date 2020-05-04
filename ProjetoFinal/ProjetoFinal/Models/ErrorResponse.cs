@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SendGrid;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,15 @@ namespace ProjetoFinal.Models
                 Codigo = 400,
                 Mensagem = "Houve erro na requisição",
                 Detalhes = identityErrors.Select(x => x.Description).ToArray()
+            };
+        }
+
+        public static ErrorResponse FromEmail(Response response)
+        {
+            return new ErrorResponse
+            {
+                Codigo = 600,
+                Mensagem = $"Não foi possível enviar e-mail, {response.StatusCode}"
             };
         }
     }

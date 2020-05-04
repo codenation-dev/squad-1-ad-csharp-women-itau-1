@@ -1,5 +1,5 @@
-﻿using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Identity;
+//using IdentityServer4.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetoFinal.Models;
@@ -68,9 +68,6 @@ namespace ProjetoFinal.ConfigStartup
                 };
 
             });
-
-
-
 
             return services;
             

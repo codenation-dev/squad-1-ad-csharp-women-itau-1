@@ -9,7 +9,7 @@ namespace ProjetoFinal.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Ambientes",
+                name: "ambiente",
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)

@@ -20,8 +20,8 @@ namespace ProjetoFinal.Controllers
             _mapper = mapper;
         }
 
-        // GET api/erro/{id}
-        [HttpGet("{id}")]
+        // GET api/erro/detalhes/{id}
+        [HttpGet("detalhes/{id}")]
         public ActionResult<ErroDTO> Get(int id)
         {
             var erroId = _erroService.ProcurarPorId(id);
@@ -35,8 +35,7 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
-        // GET api/erro/{homologacao}
-        [HttpGet("{nomeAmbiente}")]
+        [HttpGet]
         public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao")
         {
             var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
@@ -50,6 +49,35 @@ namespace ProjetoFinal.Controllers
                 return NotFound();
         }
 
+        [HttpGet("ambiente/{nomeAmbiente}/nivel/{nomeNivel}")]
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente, string nomeNivel)
+        {
+            var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
+
+            if (erroNivel != null)
+            {
+                var retorno = _mapper.Map<List<ErroDTO>>(erroNivel);
+                return Ok(retorno);
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpGet("ambiente/{nomeAmbiente}/descricao/{descricao}")]
+        public ActionResult<IEnumerable<ErroDTO>> Get(string nomeAmbiente, string descricao)
+        {
+            var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
+
+            if (erroDesc != null)
+            {
+                var retorno = _mapper.Map<List<ErroDTO>>(erroDesc);
+                return Ok(retorno);
+            }
+            else
+                return NotFound();
+        }
+
+        
         // POST api/erro
         [HttpPost]
         public ActionResult<ErroDTO> Post([FromBody] ErroDTO value)

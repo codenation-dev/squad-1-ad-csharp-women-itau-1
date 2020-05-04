@@ -22,6 +22,7 @@ namespace ProjetoFinal.Services
         {
             return _context.Erros.ToList();
         }
+
         public IList<Erro> ProcurarPorAmbiente(string nomeAmbiente)
         {
             return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente).ToList();
@@ -55,6 +56,7 @@ namespace ProjetoFinal.Services
         public Erro Salvar(Erro erro)
         {
             var erroEncontrado = _context.Erros.Find(erro.Id);
+
             if (erroEncontrado == null)
                 _context.Erros.Add(erro);
             else
@@ -67,7 +69,39 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Arquivado = erro.Arquivado;
             }
             _context.SaveChanges();
+           
             return erro;
+        }
+
+        public void Remover(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+            if (erroEncontrado != null) {
+                _context.Erros.Remove(erroEncontrado);
+                _context.SaveChanges();
+            }
+        }
+
+        public void Arquivar(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+
+            if (erroEncontrado != null)
+            {
+                erroEncontrado.Arquivado = true;
+                _context.SaveChanges();
+            }
+        }
+
+        public void Desarquivar(Erro erro)
+        {
+            var erroEncontrado = ProcurarPorId(erro.Id);
+
+            if (erroEncontrado != null)
+            {
+                erroEncontrado.Arquivado = false;
+                _context.SaveChanges();
+            }
         }
     }
 }

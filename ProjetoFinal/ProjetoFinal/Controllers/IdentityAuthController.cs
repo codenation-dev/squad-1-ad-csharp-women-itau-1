@@ -17,19 +17,6 @@ namespace ProjetoFinal.Controllers
 {
     [Produces("application/json")]
     [ApiController]
-<<<<<<< HEAD
-    [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    public class IdentityAuthController : ControllerBase
-    {
-        private readonly UserManager<IdentityUser> _userManager;
-        
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-=======
     [Authorize]
     public class IdentityAuthController : ControllerBase
     {
@@ -42,7 +29,6 @@ namespace ProjetoFinal.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _signInManager = appSettings.Value;
->>>>>>> develop
         }
         [HttpGet]
 

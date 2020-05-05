@@ -176,34 +176,36 @@ namespace ProjetoFinal.Controllers
         [HttpPost("salvar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<ErroDTO>> Post([FromBody]List<ErroDTO> value)
+        public ActionResult<ErroDTO> Post([FromBody]ErroDTO value)
 
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            List<ErroDTO> retorno = new List<ErroDTO>();
-
-            foreach (ErroDTO erro in value)
+            var ambiente = new Ambiente()
             {
-                var newErro = new Erro()
-                {
-                    Ip = erro.Ip,
-                    Data = erro.Data,
-                    Titulo = erro.Titulo,
-                    Descricoes = erro.Descricoes,
-                    Coletado = erro.Coletado,
-                    Arquivado = erro.Arquivado,
-                    AmbienteId = erro.AmbienteId,
-                    //Niveis.NomeNivel = erro.Niveis.NomeNivel,
-                    EventoId = erro.EventoId
-                };
+                NomeAmbiente = value.Ambientes.NomeAmbiente
+            };
 
-                var retornoErro = _erroService.Salvar(newErro);
+            var nivel = new Nivel()
+            {
+                NomeNivel = value.Niveis.NomeNivel
+            };
 
-                retorno.Add(_mapper.Map<ErroDTO>(retornoErro));
-            }
-            return Ok(retorno);
+            var erro = new Erro()
+            {
+                Niveis = nivel,
+                Ambientes = ambiente,
+                Ip = value.Ip,
+                Titulo = value.Titulo,
+                Descricoes = value.Descricoes,
+                Data = value.Data,
+                Coletado = value.Coletado,
+                Arquivado = value.Arquivado
+            };
+
+            var retorno = _erroService.Salvar(erro);
+            return Ok(_mapper.Map<ErroDTO>(retorno));
         }
 
     }

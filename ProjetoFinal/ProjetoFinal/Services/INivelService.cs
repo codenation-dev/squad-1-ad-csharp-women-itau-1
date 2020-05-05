@@ -7,6 +7,7 @@ namespace ProjetoFinal.Services
     {
         IList<Nivel> ListarNiveis();
         Nivel ProcurarPorId(int id);
+        Nivel ProcurarPorNome(string nome);
         Nivel Salvar(Nivel nivel);
     }
 }

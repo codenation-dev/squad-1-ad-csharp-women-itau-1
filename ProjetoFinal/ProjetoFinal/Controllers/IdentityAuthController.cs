@@ -29,7 +29,7 @@ namespace ProjetoFinal.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _signInManager = appSettings.Value;
+            _appSettings = appSettings.Value;
         }
         [HttpGet]
 

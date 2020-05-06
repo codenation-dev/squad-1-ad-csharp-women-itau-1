@@ -20,6 +20,7 @@ namespace ProjetoFinal.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         
         private readonly SignInManager<IdentityUser> _signInManager;
+
         public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;

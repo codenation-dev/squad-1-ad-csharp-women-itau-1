@@ -12,7 +12,7 @@ namespace ProjetoFinal.Models
     {
         [Column("id")]
         [Required]
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column("nivel_id")]

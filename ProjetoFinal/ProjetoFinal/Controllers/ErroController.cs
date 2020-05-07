@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetoFinal.DTOs;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjetoFinal.Controllers
 {
@@ -14,6 +15,7 @@ namespace ProjetoFinal.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize]
     public class ErroController : ControllerBase
     {
         private readonly IErroService _erroService;
@@ -171,31 +173,21 @@ namespace ProjetoFinal.Controllers
             else
                 return NotFound();
         }
-        
+
         // POST api/salvar
         [HttpPost("salvar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ErroDTO> Post([FromBody]ErroDTO value)
 
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var ambiente = new Ambiente()
-            {
-                NomeAmbiente = value.Ambientes.NomeAmbiente
-            };
-
-            var nivel = new Nivel()
-            {
-                NomeNivel = value.Niveis.NomeNivel
-            };
-
             var erro = new Erro()
             {
-                Niveis = nivel,
-                Ambientes = ambiente,
+                NivelId = value.NivelId,
+                AmbienteId = value.AmbienteId,
                 Ip = value.Ip,
                 Titulo = value.Titulo,
                 Descricoes = value.Descricoes,

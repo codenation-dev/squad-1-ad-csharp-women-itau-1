@@ -14,16 +14,10 @@ namespace ProjetoFinal.DTOs
         public int NivelId { get; set; }
 
         [Required]
-        public NivelDTO Niveis { get; set; }
-
-        [Required]
         public int EventoId { get; set; }
 
         [Required]
         public int AmbienteId { get; set; }
-
-        [Required]
-        public AmbienteDTO Ambientes { get; set; }
 
         [Required]
         public string Ip { get; set; }

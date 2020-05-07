@@ -12,11 +12,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
 
 namespace ProjetoFinal.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/{controller}")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Authorize]
     public class IdentityAuthController : ControllerBase
@@ -25,7 +26,7 @@ namespace ProjetoFinal.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly AppSettings _appSettings;
 
-        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, AppSettings appSettings)
+        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;

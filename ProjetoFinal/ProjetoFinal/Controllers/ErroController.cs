@@ -184,7 +184,7 @@ namespace ProjetoFinal.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var erro = new Erro()
+            var novoErro = new Erro()
             {
                 NivelId = value.NivelId,
                 AmbienteId = value.AmbienteId,
@@ -196,7 +196,7 @@ namespace ProjetoFinal.Controllers
                 Arquivado = value.Arquivado
             };
 
-            var retorno = _erroService.Salvar(erro);
+            var retorno = _erroService.Salvar(novoErro);
             return Ok(_mapper.Map<ErroDTO>(retorno));
         }
 

@@ -32,12 +32,6 @@ namespace ProjetoFinal.Controllers
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
         }
-        [HttpGet]
-
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "valor1", "valor2 " };
-        }
 
         [HttpPost("cadastrar")]
         [AllowAnonymous]
@@ -53,7 +47,6 @@ namespace ProjetoFinal.Controllers
                 EmailConfirmed = true
             };
 
-            //CRIA USUARIO COM CRIPTOGRAFIA
             var resultado = await _userManager.CreateAsync(usuario, cadastrarUsuario.Senha);
 
             if(resultado.Succeeded)

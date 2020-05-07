@@ -200,5 +200,60 @@ namespace ProjetoFinal.Controllers
             return Ok(_mapper.Map<ErroDTO>(retorno));
         }
 
+        //PUT api/arquivar
+        [HttpPut("arquivar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Arquivar(IList<Erro> listaIds)
+        {
+
+            if (listaIds.Count == 0)
+                return BadRequest("Nenhum erro para arquivar");
+
+            foreach (Erro erroArquivado in listaIds)
+            {
+                _erroService.Arquivar(erroArquivado);
+            }
+
+            return Ok();
+        }
+
+        //PUT api/desarquivar
+        [HttpPut("desarquivar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult Desarquivar(IList<Erro> listaIds)
+        {
+
+            if (listaIds.Count == 0)
+                return BadRequest("Nenhum erro para desarquivar");
+
+            foreach (Erro erroDesarquivado in listaIds)
+            {
+                _erroService.Desarquivar(erroDesarquivado);
+            }
+
+            return Ok();
+        }
+
+
+        //PUT api/remover
+        [HttpDelete("remover")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Deletar(IList<Erro> listaIds)
+        {
+
+            if (listaIds.Count == 0)
+                return BadRequest("Nenhum erro para remover");
+
+            foreach (Erro erroRemovido in listaIds)
+            {
+                _erroService.Remover(erroRemovido);
+            }
+
+            return Ok();
+        }
+
     }
 }

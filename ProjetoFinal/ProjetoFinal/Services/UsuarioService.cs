@@ -36,8 +36,7 @@ namespace ProjetoFinal.Services
                 return true;
             }
                 return false;
-        }
-        
+        }        
         public Usuario ProcurarPorId(int id)
         {
             return _context.Usuarios.Find(id);

@@ -12,7 +12,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using ProjetoFinal.Services;
 using Microsoft.Extensions.Options;
+using ProjetoFinal.Extensions;
+using System.Web;
 
 namespace ProjetoFinal.Controllers
 {
@@ -25,12 +28,16 @@ namespace ProjetoFinal.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly AppSettings _appSettings;
-
-        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings)
+        private readonly IEmailServices _emailServices;
+        
+        public IdentityAuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IOptions<AppSettings> appSettings, IEmailServices emailServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
+            _emailServices = emailServices;
+            
+            
         }
 
         [HttpPost("cadastrar")]
@@ -51,7 +58,7 @@ namespace ProjetoFinal.Controllers
 
             if(resultado.Succeeded)
             {
-                return Ok();
+                return Ok(resultado.Succeeded);
             }
 
             return BadRequest(ErrorResponse.FromIdentity(resultado.Errors.ToList
@@ -88,6 +95,71 @@ namespace ProjetoFinal.Controllers
             return Ok();
         }
 
+
+        [HttpPost("esqueciSenha")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(EsqueciSenhaDTO esqueciSenha)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = await _userManager.FindByEmailAsync(esqueciSenha.Email);
+            if(usuario == null)
+            {
+                return NotFound($"Usuario '{esqueciSenha}' nao encontrado.");
+            }
+            else
+            {
+                var esqueciMail = await ForgotMainPassword(usuario);
+                if(esqueciMail.Enviado)
+                    return Ok();
+
+                return Unauthorized(esqueciMail.error);
+            }
+        }
+        [HttpGet("resetSenha")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(string userId, string code)
+        {
+            if(userId == null || code == null)
+            {
+                return BadRequest("Não foi possivel resetar a senha");
+            }
+
+            var resetSenha = new ResetSenhaDTO();
+            var usuario = await  _userManager.FindByIdAsync(userId);
+            if(usuario == null)
+            {
+                return NotFound($"Usuario ID '{userId}' não encontrado");
+            }
+            else
+            {
+                resetSenha.Code = code;
+                resetSenha.Email = usuario.Email;
+                resetSenha.UserId = userId;
+                return Ok(resetSenha);
+            }
+        }
+
+        [HttpPost("restSenhaConfirma")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPasswordConfirm(ResetSenhaConfirmaDTO resetSenha)
+        {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = await _userManager.FindByEmailAsync(resetSenha.Email);
+            if( usuario == null)
+            {
+                return NotFound($"Usuario ID não encontrado");
+            }
+            else
+            {
+                return Ok(await _userManager.ResetPasswordAsync(usuario, resetSenha.Code, resetSenha.Password));
+            }
+        }
+
+
         private async Task<LoginResponseDTO> GerarJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -102,6 +174,8 @@ namespace ProjetoFinal.Controllers
             {
                 claims.Add(new Claim("role", userRole));
             }
+
+            // nova instancia de claims
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
@@ -126,7 +200,7 @@ namespace ProjetoFinal.Controllers
             var response = new LoginResponseDTO
             {
                 AccessToken = encodedToken,
-                ExpiresIn = TimeSpan.FromHours(2).TotalSeconds,
+                ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
                 UserToken = new UserTokenDTO
                 {
                     Id = user.Id,
@@ -136,6 +210,15 @@ namespace ProjetoFinal.Controllers
             };
 
             return response;
+        }
+
+        private async Task<EmailResponse> ForgotMainPassword(IdentityUser user)
+        {
+        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, HttpUtility.UrlEncode(code), Request.Scheme);
+            
+        return await _emailServices.SendEmailResetPasswordAsync(user.Email, callbackUrl);
         }
     }
 }

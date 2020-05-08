@@ -91,6 +91,10 @@ namespace ProjetoFinal
                 opt.SuppressModelStateInvalidFilter = true;
             });
 
+            services.AddTransient<IEmailServices, EmailServices>();
+
+            //CONFIG GRID
+            services.Configure<SendGridOptions>(Configuration.GetSection("SendGridOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

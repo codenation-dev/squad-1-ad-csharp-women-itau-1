@@ -48,19 +48,19 @@ namespace ProjetoFinal.Controllers
         [HttpGet("{nomeAmbiente}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao", string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao", string ord = default)
         {
             var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
 
             if (erroLista != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroLista);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroLista);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -80,20 +80,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("ambiente/{nomeAmbiente}/{nomeNivel}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel, string ord = default)
 
         {
             var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
 
             if (erroNivel != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroNivel);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroNivel);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -113,20 +113,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("descricao/{nomeAmbiente}/{descricao}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string ord = default)
 
         {
             var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
 
             if (erroDesc != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroDesc);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroDesc);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -145,20 +145,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("origem/{nomeAmbiente}/{origem}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem, string ord = default)
 
         {
             var erroOrigem = _erroService.ProcurarPorOrigem(nomeAmbiente, origem).ToList();
 
             if (erroOrigem != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroOrigem);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroOrigem);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);

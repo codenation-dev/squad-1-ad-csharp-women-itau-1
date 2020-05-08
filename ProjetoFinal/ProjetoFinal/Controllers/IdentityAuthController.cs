@@ -42,7 +42,7 @@ namespace ProjetoFinal.Controllers
 
             var usuario = new IdentityUser
             {
-                UserName = cadastrarUsuario.Nome,
+                UserName = cadastrarUsuario.Email,
                 Email = cadastrarUsuario.Email,
                 EmailConfirmed = true
             };
@@ -55,8 +55,7 @@ namespace ProjetoFinal.Controllers
             }
 
             return BadRequest(ErrorResponse.FromIdentity(resultado.Errors.ToList
-                ()));
-                
+                ()));                
         }
 
         [HttpPost("login")]
@@ -91,19 +90,14 @@ namespace ProjetoFinal.Controllers
 
         private async Task<LoginResponseDTO> GerarJwt(string email)
         {
-            // buscar usuario na base
             var user = await _userManager.FindByEmailAsync(email);
-            // buscar claims
             var claims = await _userManager.GetClaimsAsync(user);
-            // buscar regras
             var userRoles = await _userManager.GetRolesAsync(user);
 
-            // add nas claims
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
             claims.Add(new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName));
 
-            // add roles
             foreach (var userRole in userRoles)
             {
                 claims.Add(new Claim("role", userRole));
@@ -112,13 +106,10 @@ namespace ProjetoFinal.Controllers
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
 
-            // criar token
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            // chave - app settings
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
-            // criar token baseado nas info
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {
                 Issuer = _appSettings.Emissor,

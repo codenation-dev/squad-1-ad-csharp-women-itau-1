@@ -45,7 +45,7 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> ProcurarPorDescricao(string nomeAmbiente, string descricao)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes == descricao)
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes.Contains(descricao))
                 .Include(x => x.Ambientes)
                 .Include(x => x.Niveis)
                 .ToList();

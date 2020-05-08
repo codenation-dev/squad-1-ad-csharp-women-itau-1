@@ -237,23 +237,21 @@ namespace ProjetoFinal.Controllers
         }
 
 
-        //PUT api/remover
-        [HttpDelete("remover")]
+        //PUT api/erro/remover/{erroId}
+        [HttpDelete("remover/{erroId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Deletar(IList<Erro> listaIds)
+        public ActionResult Deletar(int erroId)
         {
+            var erroEncontrado = _erroService.ProcurarPorId(erroId);
 
-            if (listaIds.Count == 0)
-                return BadRequest("Nenhum erro para remover");
-
-            foreach (Erro erroRemovido in listaIds)
+            if (erroEncontrado != null)
             {
-                _erroService.Remover(erroRemovido);
+                _erroService.Remover(erroEncontrado);
+                return Ok("Erro removido com sucesso");
             }
-
-            return Ok();
+            else
+                return NotFound("Não foi possível encontrar o Erro");
         }
-
     }
 }

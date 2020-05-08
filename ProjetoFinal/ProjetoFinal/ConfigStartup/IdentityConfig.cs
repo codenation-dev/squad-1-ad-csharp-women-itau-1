@@ -17,7 +17,6 @@ namespace ProjetoFinal.ConfigStartup
 {
     public static class IdentityConfig
     {
-
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<IdentityAuthContext>(options =>
@@ -28,24 +27,11 @@ namespace ProjetoFinal.ConfigStartup
                     .AddEntityFrameworkStores<IdentityAuthContext>()
                     .AddDefaultTokenProviders();
 
-            //JWT ACESSO AO APPSETTINGS
-
             var appSettingsSection = configuration.GetSection("AppSettings");
-
-            //CONFIGURA O SERVICES COM OS PARAMETROS OBJETO APPSETTINGS
-
             services.Configure<AppSettings>(appSettingsSection);
 
-            //CAST PARA OBJETO
-
             var appSettings = appSettingsSection.Get<AppSettings>();
-
-
-            //GERAR CHAVE SECRET
-
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
-            //CONFIG DE AUTENTICACAO
 
             services.AddAuthentication(x =>
             {
@@ -64,13 +50,10 @@ namespace ProjetoFinal.ConfigStartup
                     ValidateAudience = true,
                     ValidAudience = appSettings.ValidoEm,
                     ValidIssuer = appSettings.Emissor
-
                 };
-
             });
 
-            return services;
-            
+            return services;           
         }
     }
 }

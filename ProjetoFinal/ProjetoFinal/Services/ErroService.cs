@@ -1,21 +1,28 @@
-﻿using ProjetoFinal.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoFinal.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ProjetoFinal.Services
 {
     public class ErroService : IErroService
     {
-        private Context _context;
+        private readonly Context _context;
+        private readonly IAmbienteService _ambienteService;
 
-        public ErroService(Context context)
+        public ErroService(Context context, IAmbienteService ambienteService)
         {
             _context = context;
+            _ambienteService = ambienteService;
         }
 
         public Erro ProcurarPorId(int id)
         {
-            return _context.Erros.Find(id);
+            return _context.Erros.Where(x => x.Id == id)
+                .Include(x => x.Ambientes)
+                .Include(x => x.Niveis)
+                .FirstOrDefault();
         }
 
         public IList<Erro> ListarErros()
@@ -25,7 +32,10 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> ProcurarPorAmbiente(string nomeAmbiente)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente).ToList();
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente)
+                .Include(x => x.Ambientes)
+                .Include(x => x.Niveis)
+                .ToList();
         }
 
         public IList<Erro> ProcurarPorNivel(string nomeAmbiente, string nomeNivel)
@@ -35,12 +45,18 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> ProcurarPorDescricao(string nomeAmbiente, string descricao)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes == descricao).ToList();
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes.Contains(descricao))
+                .Include(x => x.Ambientes)
+                .Include(x => x.Niveis)
+                .ToList();
         }
 
         public IList<Erro> ProcurarPorOrigem(string nomeAmbiente, string origem)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Ip == origem).ToList();
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Ip == origem)
+                .Include(x => x.Ambientes)
+                .Include(x => x.Niveis)
+                .ToList();
         }
 
         public IList<Erro> OrdenarPorNivel(List<Erro> erroLista)
@@ -58,7 +74,9 @@ namespace ProjetoFinal.Services
             var erroEncontrado = _context.Erros.Find(erro.Id);
 
             if (erroEncontrado == null)
+            {
                 _context.Erros.Add(erro);
+            }
             else
             {
                 erroEncontrado.Ip = erro.Ip;
@@ -67,8 +85,8 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Descricoes = erro.Descricoes;
                 erroEncontrado.Coletado = erro.Coletado;
                 erroEncontrado.Arquivado = erro.Arquivado;
-               //erroEncontrado.Ambientes.NomeAmbiente = erro.Ambientes.NomeAmbiente;
-                //erroEncontrado.Niveis.NomeNivel = erro.Niveis.NomeNivel;
+                erroEncontrado.Ambientes.NomeAmbiente = erro.Ambientes.NomeAmbiente;
+                erroEncontrado.Niveis.NomeNivel = erro.Niveis.NomeNivel;
                 erroEncontrado.EventoId = erro.EventoId;
             }
             _context.SaveChanges();
@@ -107,5 +125,7 @@ namespace ProjetoFinal.Services
                 _context.SaveChanges();
             }
         }
+
+
     }
 }

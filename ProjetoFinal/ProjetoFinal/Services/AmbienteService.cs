@@ -18,6 +18,11 @@ namespace ProjetoFinal.Services
             return _context.Ambientes.Find(id);
         }
 
+        public Ambiente ProcurarPorNome(string nome)
+        {
+            return _context.Ambientes.FirstOrDefault(x => x.NomeAmbiente == nome);
+        }
+
         public IList<Ambiente> ListarAmbientes()
         {
             return _context.Ambientes.ToList();
@@ -26,7 +31,7 @@ namespace ProjetoFinal.Services
         public Ambiente Salvar(Ambiente ambiente)
         {
             var ambienteEncontrado = _context.Ambientes
-                                    .Where(x => x.Id == ambiente.Id)
+                                    .Where(x => x.Id == ambiente.Id && x.NomeAmbiente == ambiente.NomeAmbiente)
                                     .FirstOrDefault();
 
             if (ambienteEncontrado == null)

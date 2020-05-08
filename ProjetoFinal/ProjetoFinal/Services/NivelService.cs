@@ -3,6 +3,7 @@ using System;
 using ProjetoFinal.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ProjetoFinal.Services
 
@@ -17,6 +18,11 @@ namespace ProjetoFinal.Services
         public Nivel ProcurarPorId(int id)
         {
             return _context.Niveis.Find(id);
+        }
+
+        public Nivel ProcurarPorNome(string nome)
+        {
+            return _context.Niveis.FirstOrDefault(x => x.NomeNivel == nome);
         }
 
         public IList<Nivel> ListarNiveis()

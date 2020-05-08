@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetoFinal.DTOs;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjetoFinal.Controllers
 {
@@ -14,6 +15,7 @@ namespace ProjetoFinal.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize]
     public class ErroController : ControllerBase
     {
         private readonly IErroService _erroService;
@@ -46,19 +48,19 @@ namespace ProjetoFinal.Controllers
         [HttpGet("{nomeAmbiente}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao", string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetAll(string nomeAmbiente = "producao", string ord = default)
         {
             var erroLista = _erroService.ProcurarPorAmbiente(nomeAmbiente).ToList();
 
             if (erroLista != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroLista);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroLista);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -78,20 +80,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("ambiente/{nomeAmbiente}/{nomeNivel}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetNivel(string nomeAmbiente, string nomeNivel, string ord = default)
 
         {
             var erroNivel = _erroService.ProcurarPorNivel(nomeAmbiente, nomeNivel).ToList();
 
             if (erroNivel != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroNivel);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroNivel);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -111,20 +113,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("descricao/{nomeAmbiente}/{descricao}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetDescricao(string nomeAmbiente, string descricao, string ord = default)
 
         {
             var erroDesc = _erroService.ProcurarPorDescricao(nomeAmbiente, descricao).ToList();
 
             if (erroDesc != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroDesc);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroDesc);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -143,20 +145,20 @@ namespace ProjetoFinal.Controllers
         [HttpGet("origem/{nomeAmbiente}/{origem}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem, string ordNivel = default(string), string ordFrequencia = default(string))
+        public ActionResult<IEnumerable<ErroDTO>> GetOrigem(string nomeAmbiente, string origem, string ord = default)
 
         {
             var erroOrigem = _erroService.ProcurarPorOrigem(nomeAmbiente, origem).ToList();
 
             if (erroOrigem != null)
             {
-                if (ordNivel != null)
+                if (ord == "nivel")
                 {
                     var ordenacao = _erroService.OrdenarPorNivel(erroOrigem);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
                     return Ok(retorno);
                 }
-                else if (ordFrequencia != null)
+                else if (ord == "frequencia")
                 {
                     var ordenacao = _erroService.OrdenarPorFrequencia(erroOrigem);
                     var retorno = _mapper.Map<List<ErroDTO>>(ordenacao);
@@ -171,40 +173,85 @@ namespace ProjetoFinal.Controllers
             else
                 return NotFound();
         }
-        
+
         // POST api/salvar
         [HttpPost("salvar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<List<ErroDTO>> Post([FromBody]List<ErroDTO> value)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<ErroDTO> Post([FromBody]ErroDTO value)
 
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            List<ErroDTO> retorno = new List<ErroDTO>();
-
-            foreach (ErroDTO erro in value)
+            var novoErro = new Erro()
             {
-                var newErro = new Erro()
-                {
-                    Ip = erro.Ip,
-                    Data = erro.Data,
-                    Titulo = erro.Titulo,
-                    Descricoes = erro.Descricoes,
-                    Coletado = erro.Coletado,
-                    Arquivado = erro.Arquivado,
-                    AmbienteId = erro.AmbienteId,
-                    //Niveis.NomeNivel = erro.Niveis.NomeNivel,
-                    EventoId = erro.EventoId
-                };
+                NivelId = value.NivelId,
+                AmbienteId = value.AmbienteId,
+                Ip = value.Ip,
+                Titulo = value.Titulo,
+                Descricoes = value.Descricoes,
+                Data = value.Data,
+                Coletado = value.Coletado,
+                Arquivado = value.Arquivado
+            };
 
-                var retornoErro = _erroService.Salvar(newErro);
-
-                retorno.Add(_mapper.Map<ErroDTO>(retornoErro));
-            }
-            return Ok(retorno);
+            var retorno = _erroService.Salvar(novoErro);
+            return Ok(_mapper.Map<ErroDTO>(retorno));
         }
 
+        //PUT api/arquivar
+        [HttpPut("arquivar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Arquivar(IList<Erro> listaIds)
+        {
+
+            if (listaIds.Count == 0)
+                return BadRequest("Nenhum erro para arquivar");
+
+            foreach (Erro erroArquivado in listaIds)
+            {
+                _erroService.Arquivar(erroArquivado);
+            }
+
+            return Ok();
+        }
+
+        //PUT api/desarquivar
+        [HttpPut("desarquivar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult Desarquivar(IList<Erro> listaIds)
+        {
+
+            if (listaIds.Count == 0)
+                return BadRequest("Nenhum erro para desarquivar");
+
+            foreach (Erro erroDesarquivado in listaIds)
+            {
+                _erroService.Desarquivar(erroDesarquivado);
+            }
+
+            return Ok();
+        }
+
+
+        //PUT api/erro/remover/{erroId}
+        [HttpDelete("remover/{erroId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult Deletar(int erroId)
+        {
+            var erroEncontrado = _erroService.ProcurarPorId(erroId);
+
+            if (erroEncontrado != null)
+            {
+                _erroService.Remover(erroEncontrado);
+                return Ok("Erro removido com sucesso");
+            }
+            else
+                return NotFound("Não foi possível encontrar o Erro");
+        }
     }
 }

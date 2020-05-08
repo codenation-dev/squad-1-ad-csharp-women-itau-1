@@ -7,7 +7,6 @@ using System.Security.Claims;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -17,7 +16,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using ProjetoFinal.ConfigStartup;
 
 
 namespace ProjetoFinal

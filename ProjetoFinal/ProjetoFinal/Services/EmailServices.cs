@@ -35,7 +35,7 @@ namespace ProjetoFinal.Services
                 };
 
                 // email do usuario
-                msg.AddTo(new EmailAddress("marcelabvale@gmail.com", email));
+                msg.AddTo(new EmailAddress(email));
 
                 // envio do email
                 var responseSend = await client.SendEmailAsync(msg);

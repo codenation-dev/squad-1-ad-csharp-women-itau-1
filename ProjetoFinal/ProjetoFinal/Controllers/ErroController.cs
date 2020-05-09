@@ -26,7 +26,7 @@ namespace ProjetoFinal.Controllers
             _mapper = mapper;
         }
 
-        // GET api/erro/detalhes/{id}
+        // GET api/v1/erro/detalhes/{id}
         [HttpGet("detalhes/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -41,10 +41,10 @@ namespace ProjetoFinal.Controllers
                 return Ok(retorno);
             }
             else
-                return NotFound();
+                return NotFound("Erro não encontrado");
         }
 
-        // GET api/erro/
+        // GET api/v1/erro/{nomeAmbiente}
         [HttpGet("{nomeAmbiente}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -73,10 +73,10 @@ namespace ProjetoFinal.Controllers
                 }
             }
             else
-                return NotFound();
+                return NotFound("Erro não encontrado");
         }
 
-
+        // GET api/v1/erro/ambiente/{nomeAmbiente}/{nomeNivel}
         [HttpGet("ambiente/{nomeAmbiente}/{nomeNivel}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -106,10 +106,10 @@ namespace ProjetoFinal.Controllers
                 }
             }
             else
-                return NotFound();
+                return NotFound("Erro não encontrado");
         }
 
-
+        // GET api/v1/erro/descricao/{nomeAmbiente}/{descricao}
         [HttpGet("descricao/{nomeAmbiente}/{descricao}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -139,9 +139,10 @@ namespace ProjetoFinal.Controllers
                 }
             }
             else
-                return NotFound();
+                return NotFound("Erro não encontrado");
         }
 
+        // GET api/v1/erro/origem/{nomeAmbiente}/{origem}
         [HttpGet("origem/{nomeAmbiente}/{origem}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -171,7 +172,7 @@ namespace ProjetoFinal.Controllers
                 }
             }
             else
-                return NotFound();
+                return NotFound("Erro não encontrado");
         }
 
         // POST api/salvar
@@ -188,6 +189,7 @@ namespace ProjetoFinal.Controllers
             {
                 NivelId = value.NivelId,
                 AmbienteId = value.AmbienteId,
+                EventoId = value.EventoId,
                 Ip = value.Ip,
                 Titulo = value.Titulo,
                 Descricoes = value.Descricoes,
@@ -200,7 +202,7 @@ namespace ProjetoFinal.Controllers
             return Ok(_mapper.Map<ErroDTO>(retorno));
         }
 
-        //PUT api/arquivar
+        // PUT api/arquivar
         [HttpPut("arquivar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -218,7 +220,7 @@ namespace ProjetoFinal.Controllers
             return Ok();
         }
 
-        //PUT api/desarquivar
+        // PUT api/desarquivar
         [HttpPut("desarquivar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -237,10 +239,10 @@ namespace ProjetoFinal.Controllers
         }
 
 
-        //PUT api/erro/remover/{erroId}
+        // DELETE api/erro/remover/{erroId}
         [HttpDelete("remover/{erroId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Deletar(int erroId)
         {
             var erroEncontrado = _erroService.ProcurarPorId(erroId);

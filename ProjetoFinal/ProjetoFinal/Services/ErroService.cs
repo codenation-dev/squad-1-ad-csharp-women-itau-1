@@ -9,12 +9,10 @@ namespace ProjetoFinal.Services
     public class ErroService : IErroService
     {
         private readonly Context _context;
-        private readonly IAmbienteService _ambienteService;
 
-        public ErroService(Context context, IAmbienteService ambienteService)
+        public ErroService(Context context)
         {
             _context = context;
-            _ambienteService = ambienteService;
         }
 
         public Erro ProcurarPorId(int id)
@@ -85,8 +83,8 @@ namespace ProjetoFinal.Services
                 erroEncontrado.Descricoes = erro.Descricoes;
                 erroEncontrado.Coletado = erro.Coletado;
                 erroEncontrado.Arquivado = erro.Arquivado;
-                erroEncontrado.Ambientes.NomeAmbiente = erro.Ambientes.NomeAmbiente;
-                erroEncontrado.Niveis.NomeNivel = erro.Niveis.NomeNivel;
+                erroEncontrado.AmbienteId = erro.AmbienteId;
+                erroEncontrado.NivelId = erro.NivelId;
                 erroEncontrado.EventoId = erro.EventoId;
             }
             _context.SaveChanges();

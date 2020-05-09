@@ -8,10 +8,15 @@ namespace ProjetoFinal.Models
 {
     public class Context : DbContext
     {
-        public DbSet<Ambiente> Ambientes { get; set; }
+       public DbSet<Ambiente> Ambientes { get; set; }
         public DbSet<Nivel> Niveis { get; set; }
         public DbSet<Erro> Erros { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+
+        public Context(DbContextOptions<Context> options) : base(options)
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

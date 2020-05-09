@@ -9,12 +9,10 @@ namespace ProjetoFinal.Services
     public class ErroService : IErroService
     {
         private readonly Context _context;
-        private readonly IAmbienteService _ambienteService;
 
-        public ErroService(Context context, IAmbienteService ambienteService)
+        public ErroService(Context context)
         {
             _context = context;
-            _ambienteService = ambienteService;
         }
 
         public Erro ProcurarPorId(int id)

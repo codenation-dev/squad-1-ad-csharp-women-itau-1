@@ -141,7 +141,7 @@ namespace ProjetoFinal.Controllers
             }
         }
 
-        [HttpPost("restSenhaConfirma")]
+        [HttpPost("resetSenhaConfirma")]
         [AllowAnonymous]
         public async Task<IActionResult> ResetPasswordConfirm(ResetSenhaConfirmaDTO resetSenha)
         {
@@ -155,7 +155,8 @@ namespace ProjetoFinal.Controllers
             }
             else
             {
-                return Ok(await _userManager.ResetPasswordAsync(usuario, resetSenha.Code, resetSenha.Password));
+                var codigoFormatado = HttpUtility.UrlDecode(resetSenha.Code);
+                return Ok(await _userManager.ResetPasswordAsync(usuario, codigoFormatado, resetSenha.Password));
             }
         }
 

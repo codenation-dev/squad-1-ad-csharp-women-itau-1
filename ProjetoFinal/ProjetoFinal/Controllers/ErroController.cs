@@ -206,36 +206,35 @@ namespace ProjetoFinal.Controllers
         [HttpPut("arquivar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Arquivar(IList<Erro> listaIds)
+        public ActionResult Arquivar(int erroId)
         {
+            var erroArquivado = _erroService.ProcurarPorId(erroId);
 
-            if (listaIds.Count == 0)
-                return BadRequest("Nenhum erro para arquivar");
-
-            foreach (Erro erroArquivado in listaIds)
+            if (erroArquivado != null)
             {
                 _erroService.Arquivar(erroArquivado);
+                return Ok("Erro removido com sucesso!");
             }
-
-            return Ok();
+            else
+                return NotFound("Não foi possível encontrar o Erro");
         }
 
         // PUT api/desarquivar
         [HttpPut("desarquivar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Desarquivar(IList<Erro> listaIds)
+        public ActionResult Desarquivar(int erroId)
         {
 
-            if (listaIds.Count == 0)
-                return BadRequest("Nenhum erro para desarquivar");
+            var erroDesarquivado = _erroService.ProcurarPorId(erroId);
 
-            foreach (Erro erroDesarquivado in listaIds)
+            if (erroDesarquivado != null)
             {
                 _erroService.Desarquivar(erroDesarquivado);
+                return Ok("Erro removido com sucesso!");
             }
-
-            return Ok();
+            else
+                return NotFound("Não foi possível encontrar o Erro");
         }
 
 

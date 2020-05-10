@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="FakeData\ambiente.json" />
+    <None Remove="FakeData\nivel.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JUnitTestLogger" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
@@ -23,6 +28,12 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Content Include="FakeData\nivel.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FakeData\ambiente.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FakeData\erro.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

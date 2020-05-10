@@ -23,12 +23,16 @@ namespace ProjetoFinal.Test
                 .Options;
 
             DataFileNames.Add(typeof(Erro), $"FakeData{Path.DirectorySeparatorChar}erro.json");
+            DataFileNames.Add(typeof(Ambiente), $"FakeData{Path.DirectorySeparatorChar}ambiente.json");
+            DataFileNames.Add(typeof(Nivel), $"FakeData{Path.DirectorySeparatorChar}nivel.json");
 
         }
 
         public void FillWithAll()
         {
             FillWith<Erro>();
+            FillWith<Ambiente>();
+            FillWith<Nivel>();
         }
 
         public void FillWith<T>() where T : class

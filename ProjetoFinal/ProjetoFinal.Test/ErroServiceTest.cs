@@ -26,6 +26,9 @@ namespace ProjetoFinal.Test
 
         [Theory]
         [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
 
         public void Devera_retornar_Erro_Por_Id(int id)
         {
@@ -35,6 +38,17 @@ namespace ProjetoFinal.Test
 
             Assert.Equal(erroEsperado, atual, new ErroIdComparer());
         }
+
+        [Fact]
+        public void Devera_retornar_Lista_de_Erros()
+        {
+            _contextoFake.FillWithAll();
+
+            //metodo de teste
+            var erroAtual = _erroService.ListarErros();
+            Assert.NotNull(erroAtual);
+        }
+
 
     }
 }

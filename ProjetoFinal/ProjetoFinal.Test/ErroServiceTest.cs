@@ -43,8 +43,6 @@ namespace ProjetoFinal.Test
         public void Devera_retornar_Lista_de_Erros()
         {
             _contextoFake.FillWithAll();
-
-            //metodo de teste
             var erroAtual = _erroService.ListarErros();
             Assert.NotNull(erroAtual);
         }

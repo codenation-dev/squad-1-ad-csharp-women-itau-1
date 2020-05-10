@@ -17,10 +17,7 @@ namespace ProjetoFinal.Services
 
         public Erro ProcurarPorId(int id)
         {
-            return _context.Erros.Where(x => x.Id == id)
-                .Include(x => x.Ambientes)
-                .Include(x => x.Niveis)
-                .FirstOrDefault();
+            return _context.Erros.Find(id);
         }
 
         public IList<Erro> ListarErros()

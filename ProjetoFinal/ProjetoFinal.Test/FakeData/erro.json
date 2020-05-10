@@ -1,36 +1,26 @@
-﻿[
+[
   {
-    "NivelId": 1,
-    "AmbienteId": 1,
-    "Ip": "192.178.0.3",
-    "Data": "2020-04-13",
-    "Titulo": "error.Service.ProcurarPorAmbiente: forbidden",
-    "Descricoes": "Olar, Debug 1 no acceleration.Service.AddCandidate",
-    "Coletado": "Token do usuário Aline",
-    "Arquivado": false,
-    "EventoId": 123
+    "id": 1,
+    "nivelId": 1,
+    "eventoId": 1,
+    "ambienteId": 1,
+    "ip": "string",
+    "titulo": "string",
+    "descricoes": "string",
+    "data": "2020-05-10T01:52:51.114Z",
+    "coletado": "string",
+    "arquivado": false
   },
   {
-    "NivelId": 2,
-    "AmbienteId": 2,
-    "Ip": "192.121.0.4",
-    "Data": "2020-04-13",
-    "Titulo": "error.Service.ProcurarPorAmbiente: forbidden",
-    "Descricoes": "Olar, Debug 3 no acceleration.Service.AddCandidate",
-    "Coletado": "Token do usuário Amanda",
-    "Arquivado": false,
-    "EventoId": 123
-  },
-  {
-    "NivelId": 3,
-    "AmbienteId": 3,
-    "Ip": "192.168.0.3",
-    "Data": "2020-04-13",
-    "Titulo": "error.Service.ProcurarPorAmbiente: forbidden",
-    "Descricoes": "Olar, Debug 3 no acceleration.Service.AddCandidate",
-    "Coletado": "Token do usuário Carla",
-    "Arquivado": false,
-    "EventoId": 123
+    "id": 2,
+    "nivelId": 1,
+    "eventoId": 1,
+    "ambienteId": 1,
+    "ip": "string",
+    "titulo": "string",
+    "descricoes": "string",
+    "data": "2020-05-10T01:52:51.114Z",
+    "coletado": "string",
+    "arquivado": false
   }
-
 ]

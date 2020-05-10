@@ -10,51 +10,44 @@ namespace ProjetoFinal.Test
 {
     public class FakeContext
     {
-        public DbContextOptions<Context> Options { get; }
+        public DbContextOptions<Context> FakeOptions { get; }
 
-        private Dictionary<Type, string> NomesArquivosDados { get; } = new Dictionary<Type, string>();
+        private Dictionary<Type, string> DataFileNames { get; } =
+            new Dictionary<Type, string>();
+        private string FileName<T>() { return DataFileNames[typeof(T)]; }
 
-
-        public FakeContext(string NomeTeste)
+        public FakeContext(string testName)
         {
-            Options = new DbContextOptionsBuilder<Context>()
-                 //.UseInMemoryDatabase(databaseName: $"Context_{NomeTeste}")
-                 .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ProjetoFinal;Trusted_Connection=True")
-                 .Options;
+            FakeOptions = new DbContextOptionsBuilder<Context>()
+                .UseInMemoryDatabase(databaseName: $"Test_{testName}")
+                .Options;
 
-            NomesArquivosDados.Add(typeof(Erro), $"FakeData{Path.DirectorySeparatorChar}erro.json");
+            DataFileNames.Add(typeof(Erro), $"FakeData{Path.DirectorySeparatorChar}erro.json");
 
         }
-        private string NomeArquivo<T>()
+
+        public void FillWithAll()
         {
-            return NomesArquivosDados[typeof(T)];
+            FillWith<Erro>();
         }
 
-        public List<T> GetDadosFake<T>()
+        public void FillWith<T>() where T : class
         {
-            // retorna lista tipada JSON (serealizada)
-            string conteudo = File.ReadAllText(NomeArquivo<T>());
-
-            // variável T (tê maiúsculo) representa um tipo genérico, podemos deserializar através de todos modelos 
-            return JsonConvert.DeserializeObject<List<T>>(conteudo);
-        }
-
-        public void AdicionarTodosDados()
-        {
-            AdicionarDados<Erro>();
-        }
-
-        public void AdicionarDados<T>() where T : class
-        {
-            using (var context = new Context(Options))
+            using (var context = new Context(FakeOptions))
             {
                 if (context.Set<T>().Count() == 0)
                 {
-                    foreach (T item in GetDadosFake<T>())
+                    foreach (T item in GetFakeData<T>())
                         context.Set<T>().Add(item);
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
+        }
+
+        public List<T> GetFakeData<T>()
+        {
+            string content = File.ReadAllText(FileName<T>());
+            return JsonConvert.DeserializeObject<List<T>>(content);
         }
     }
 }

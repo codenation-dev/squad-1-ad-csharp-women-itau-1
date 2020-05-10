@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjetoFinal.Models.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace ProjetoFinal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ErroConfiguration());
+            modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
 
         }
     }

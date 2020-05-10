@@ -136,11 +136,13 @@ namespace ProjetoFinal.Migrations
                     b.HasOne("ProjetoFinal.Models.Ambiente", "Ambientes")
                         .WithMany("Erros")
                         .HasForeignKey("AmbienteId")
+                        .HasConstraintName("FK_erro_ambiente")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProjetoFinal.Models.Nivel", "Niveis")
                         .WithMany("Erros")
                         .HasForeignKey("NivelId")
+                        .HasConstraintName("FK_erro_nivel")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

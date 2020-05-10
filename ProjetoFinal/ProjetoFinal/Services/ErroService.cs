@@ -27,10 +27,7 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> ProcurarPorAmbiente(string nomeAmbiente)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente)
-                .Include(x => x.Ambientes)
-                .Include(x => x.Niveis)
-                .ToList();
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente).ToList();
         }
 
         public IList<Erro> ProcurarPorNivel(string nomeAmbiente, string nomeNivel)
@@ -40,10 +37,7 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> ProcurarPorDescricao(string nomeAmbiente, string descricao)
         {
-            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes.Contains(descricao))
-                .Include(x => x.Ambientes)
-                .Include(x => x.Niveis)
-                .ToList();
+            return _context.Erros.Where(x => x.Ambientes.NomeAmbiente == nomeAmbiente && x.Descricoes.Contains(descricao)).ToList();
         }
 
         public IList<Erro> ProcurarPorOrigem(string nomeAmbiente, string origem)

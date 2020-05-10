@@ -10,7 +10,7 @@ using ProjetoFinal.Models;
 namespace ProjetoFinal.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200504225203_ProjetoFinal")]
+    [Migration("20200510202826_ProjetoFinal")]
     partial class ProjetoFinal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,11 +138,13 @@ namespace ProjetoFinal.Migrations
                     b.HasOne("ProjetoFinal.Models.Ambiente", "Ambientes")
                         .WithMany("Erros")
                         .HasForeignKey("AmbienteId")
+                        .HasConstraintName("FK_erro_ambiente")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ProjetoFinal.Models.Nivel", "Niveis")
                         .WithMany("Erros")
                         .HasForeignKey("NivelId")
+                        .HasConstraintName("FK_erro_nivel")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

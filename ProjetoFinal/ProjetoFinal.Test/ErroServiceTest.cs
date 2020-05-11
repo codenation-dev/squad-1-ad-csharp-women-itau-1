@@ -142,5 +142,135 @@ namespace ProjetoFinal.Test
 
         }
 
+        [Fact]
+        public void Devera_Ordernar_Erros_Por_Nivel()
+        {
+            _contextoFake.FillWithAll();
+            var erroLista = _erroService.ListarErros().ToList();
+            var erroAtual = _erroService.OrdenarPorNivel(erroLista);
+            Assert.NotNull(erroAtual);
+        }
+
+        [Fact]
+        public void Devera_Ordernar_Erros_Por_Frequencia()
+        {
+            _contextoFake.FillWithAll();
+            var erroLista = _erroService.ListarErros().ToList();
+            var erroAtual = _erroService.OrdenarPorFrequencia(erroLista);
+            Assert.NotNull(erroAtual);
+        }
+
+        [Fact]
+        public void Devera_Add_Novo_Erro()
+        {
+            var fakeContext = new FakeContext("AddErro");
+
+            var fakeErro = new Erro();
+            fakeErro.AmbienteId = 1;
+            fakeErro.Arquivado = false;
+            fakeErro.Coletado = "Squad";
+            fakeErro.Data = DateTime.Today;
+            fakeErro.Descricoes = "haha";
+            fakeErro.EventoId = 2;
+            fakeErro.Ip = "11234";
+            fakeErro.NivelId = 2;
+            fakeErro.Titulo = "Teste Squad";
+
+            using (var context = new Context(fakeContext.FakeOptions))
+            {
+                var service = new ErroService(context);
+                var actual = service.Salvar(fakeErro);
+
+                Assert.NotEqual(0, actual.Id);
+                Assert.NotEqual(0, actual.AmbienteId);
+                Assert.NotEqual(0, actual.EventoId);
+                Assert.NotEqual(0, actual.NivelId);
+            }
+        }
+
+        [Fact]
+        public void Devera_Remover_Erro()
+        {
+            var fakeContext = new FakeContext("RemoveErro");
+            _contextoFake.FillWithAll();
+
+            var fakeErro = new Erro();
+            fakeErro.AmbienteId = 1;
+            fakeErro.Arquivado = false;
+            fakeErro.Coletado = "Squad";
+            fakeErro.Data = DateTime.Today;
+            fakeErro.Descricoes = "haha";
+            fakeErro.EventoId = 2;
+            fakeErro.Ip = "11234";
+            fakeErro.NivelId = 2;
+            fakeErro.Titulo = "Teste Squad";
+
+            using (var context = new Context(fakeContext.FakeOptions))
+            {
+                var service = new ErroService(context);
+                var actual = service.Salvar(fakeErro);
+                service.Remover(fakeErro);
+                var erroProcurado = service.ProcurarPorId(fakeErro.Id);
+                Assert.Null(erroProcurado);
+            }
+        }
+
+        [Fact]
+        public void Devera_Arquivar_Erro()
+        {
+            var fakeContext = new FakeContext("ArquivaErro");
+            _contextoFake.FillWithAll();
+
+            var fakeErro = new Erro();
+            fakeErro.AmbienteId = 1;
+            fakeErro.Arquivado = false;
+            fakeErro.Coletado = "Squad";
+            fakeErro.Data = DateTime.Today;
+            fakeErro.Descricoes = "haha";
+            fakeErro.EventoId = 2;
+            fakeErro.Ip = "11234";
+            fakeErro.NivelId = 2;
+            fakeErro.Titulo = "Teste Squad";
+
+            using (var context = new Context(fakeContext.FakeOptions))
+            {
+                var service = new ErroService(context);
+                var actual = service.Salvar(fakeErro);
+                service.Arquivar(fakeErro);
+
+                Assert.True(fakeErro.Arquivado);
+
+            }
+        }
+
+        [Fact]
+        public void Devera_Desarquivar_Erro()
+        {
+            var fakeContext = new FakeContext("DesarquivaErro");
+            _contextoFake.FillWithAll();
+
+            var fakeErro = new Erro();
+            fakeErro.AmbienteId = 1;
+            fakeErro.Arquivado = true;
+            fakeErro.Coletado = "Squad";
+            fakeErro.Data = DateTime.Today;
+            fakeErro.Descricoes = "haha";
+            fakeErro.EventoId = 2;
+            fakeErro.Ip = "11234";
+            fakeErro.NivelId = 2;
+            fakeErro.Titulo = "Teste Squad";
+
+            using (var context = new Context(fakeContext.FakeOptions))
+            {
+                var service = new ErroService(context);
+                var actual = service.Salvar(fakeErro);
+                service.Desarquivar(fakeErro);
+
+                Assert.False(fakeErro.Arquivado);
+
+            }
+        }
+
+
     }
 }

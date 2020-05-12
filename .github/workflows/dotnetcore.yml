@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: artifact
-        path: output/
+        path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/output'
 
     # Deploy to Azure Web apps
     - name: 'Run Azure webapp deploy action using publish profile credentials'

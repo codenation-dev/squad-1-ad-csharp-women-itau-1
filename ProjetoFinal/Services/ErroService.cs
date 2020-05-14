@@ -56,7 +56,18 @@ namespace ProjetoFinal.Services
 
         public IList<Erro> OrdenarPorFrequencia(List<Erro> erroLista)
         {
-            return erroLista.GroupBy(x => x.NivelId).OrderByDescending(x => x.Count()).SelectMany(x => x).ToList();
+            var ordenacao = erroLista
+                                .GroupBy(x => x.NivelId)
+                                .Select(group => new
+                                    {
+                                        NivelId = group.Key,
+                                        Frequencia = group.Count()
+                                    })
+                                .OrderByDescending(x => x.Frequencia)
+                                .ToList();
+
+            var ordenacaoFrequencia = ordenacao.Select(x => x.NivelId).ToList();
+            return erroLista.OrderBy(x => ordenacaoFrequencia.IndexOf(x.NivelId)).ToList();
         }
 
         public Erro Salvar(Erro erro)

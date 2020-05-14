@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjetoFinal.DTOs;
 using ProjetoFinal.Models;
 using ProjetoFinal.Services;
+using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Controllers
 {

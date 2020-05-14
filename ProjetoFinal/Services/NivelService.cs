@@ -4,6 +4,7 @@ using ProjetoFinal.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
+using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Services
 

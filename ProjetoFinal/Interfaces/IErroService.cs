@@ -1,7 +1,7 @@
 ﻿using ProjetoFinal.Models;
 using System.Collections.Generic;
 
-namespace ProjetoFinal.Services
+namespace ProjetoFinal.Interfaces
 {
     public interface IErroService
     {

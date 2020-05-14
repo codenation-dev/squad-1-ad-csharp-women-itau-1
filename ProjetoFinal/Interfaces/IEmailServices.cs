@@ -1,7 +1,7 @@
 ﻿using ProjetoFinal.Models;
 using System.Threading.Tasks;
 
-namespace ProjetoFinal.Services
+namespace ProjetoFinal.Interfaces
 {
     public interface IEmailServices
     {

@@ -1,6 +1,6 @@
 ﻿using ProjetoFinal.Models;
 
-namespace ProjetoFinal.Services
+namespace ProjetoFinal.Interfaces
 {
     public interface IUsuarioService
     {

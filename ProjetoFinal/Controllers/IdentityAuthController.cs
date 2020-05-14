@@ -16,6 +16,7 @@ using ProjetoFinal.Services;
 using Microsoft.Extensions.Options;
 using ProjetoFinal.Extensions;
 using System.Web;
+using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Controllers
 {

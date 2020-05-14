@@ -2,6 +2,7 @@
 using ProjetoFinal.Filters;
 using ProjetoFinal.Models;
 using ProjetoFinal.Services;
+using ProjetoFinal.Interfaces;
 using AutoMapper;
 using System.Security.Claims;
 using Swashbuckle.AspNetCore.SwaggerGen;

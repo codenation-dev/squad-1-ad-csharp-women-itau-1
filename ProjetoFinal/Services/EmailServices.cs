@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Services
 {

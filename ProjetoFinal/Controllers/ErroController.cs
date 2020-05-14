@@ -8,6 +8,7 @@ using ProjetoFinal.DTOs;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using ProjetoFinal.Interfaces;
 
 namespace ProjetoFinal.Controllers
 {
